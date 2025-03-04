@@ -1,6 +1,6 @@
+import Cookies from "js-cookie";
 import React from "react";
 import HttpClient from "../lib/api/HttpClient";
-import Cookies from "js-cookie";
 
 const AuthContext = React.createContext();
 
@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
     if (Cookies.get("token")) {
       fetchUser();
     }
-  }, [ Cookies.get("token") ]);
+  }, [Cookies.get("token")]);
 
   const fetchUser = async () => {
     try {
@@ -36,9 +36,11 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => {
+  const logout = async () => {
+    const res = await HttpClient.post("/logout");
     Cookies.remove("token");
     setToken(null);
+    setUser(null);
   };
 
   console.log("usersrrr", user);

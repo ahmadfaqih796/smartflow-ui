@@ -1,9 +1,18 @@
-import React from 'react'
+import React from "react";
+import { useAuth } from "../context/AuthContext";
 
 const Dashboard = () => {
-  return (
-    <div>Dashboard</div>
-  )
-}
+  const { logout } = useAuth();
 
-export default Dashboard
+  const handleLogout = async () => {
+    await logout();
+  };
+  return (
+    <div>
+      Dashboard
+      <button onClick={handleLogout}>Logout</button>
+    </div>
+  );
+};
+
+export default Dashboard;
