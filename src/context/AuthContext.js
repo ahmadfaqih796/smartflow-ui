@@ -1,10 +1,11 @@
 import Cookies from "js-cookie";
 import React from "react";
-import HttpClient from "../lib/api/HttpClient";
+import AuthService from "../lib/services/AuthService";
 
 const AuthContext = React.createContext();
 
 export const AuthProvider = ({ children }) => {
+  const authService = new AuthService();
   const [user, setUser] = React.useState(null);
   const [token, setToken] = React.useState(Cookies.get("token") || "");
 
@@ -12,14 +13,14 @@ export const AuthProvider = ({ children }) => {
     if (Cookies.get("token")) {
       fetchUser();
     }
-  }, [Cookies.get("token")]);
+  }, [token]);
 
   const fetchUser = async () => {
     try {
-      const response = await HttpClient.get("/me", {
-        headers: { Authorization: `Bearer ${Cookies.get("token")}` },
-      });
-      setUser(response.data);
+      // const response = await HttpClient.get("/me", {
+      //   headers: { Authorization: `Bearer ${Cookies.get("token")}` },
+      // });
+      // setUser(response.data);
     } catch (error) {
       console.log("Gagal mengambil data user", error);
     }
@@ -27,9 +28,10 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (credentials) => {
     try {
-      const response = await HttpClient.post("/login", credentials);
-      Cookies.set("token", response.data.token, { expires: 7 });
-      setToken(response.data.token);
+      const response = await authService.login(credentials);
+      console.log("mmmamamamam", response)
+      Cookies.set("token", response.data.Token, { expires: 7 });
+      setToken(response.data.Token);
       fetchUser();
     } catch (error) {
       console.error("Login gagal:", error);
@@ -37,7 +39,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    const res = await HttpClient.post("/logout");
+    // await HttpClient.post("/logout");
     Cookies.remove("token");
     setToken(null);
     setUser(null);

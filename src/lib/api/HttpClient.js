@@ -1,11 +1,25 @@
 import axios from 'axios';
+import Cookies from "js-cookie";
 
 class HttpClient {
   constructor() {
     this.instance = axios.create({
-      baseURL: process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000/api',
-      headers: { 'Content-Type': 'application/json' },
+      baseURL: "/api",
+      responseType: 'json',
+      headers: { 
+        'Content-Type': 'application/json',
+        Authorization: Cookies.get("token")
+       },
     });
+    this.instance.interceptors.request.use(
+      response => response,
+      error => {
+        if (error?.response?.data?.message === "Invalid Token") {
+          window.location.href = `/auth/login?sessionExpired=true`;
+        }
+        return Promise.reject(error);
+      }
+    )
   }
 
   get(url, config) {
@@ -24,5 +38,4 @@ class HttpClient {
     return this.instance.delete(url, config);
   }
 }
-
-export default new HttpClient();
+export default HttpClient;
