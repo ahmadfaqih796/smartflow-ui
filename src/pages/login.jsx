@@ -1,42 +1,68 @@
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Button, Card } from "@mui/material";
 import React from "react";
-import { useAuth } from "../context/AuthContext";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
+import { InputPassword, InputText } from "../components/common/input";
+import { useAlert } from "../context/AlertContext";
+import { useAuth } from "../context/AuthContext";
 import { encryptPassword } from "../utils/generatePassword";
+
+const schema = yup.object().shape({
+  username: yup.string().required("Username wajib diisi"),
+  password: yup
+    .string()
+    // .min(6, "Password minimal 6 karakter")
+    .required("Password wajib diisi"),
+});
 
 const Login = () => {
   const { login } = useAuth();
+  const { showAlert } = useAlert();
   const navigate = useNavigate();
-  const [username, setUsername] = React.useState("goklas");
-  const [password, setPassword] = React.useState("23");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = async (data) => {
     await login({
-      username,
-      password: encryptPassword(password),
+      username: data.username,
+      password: encryptPassword(data.password),
     });
+    showAlert("Login Berhasil", "success");
     navigate("/dashboard");
   };
 
   return (
-    <div>
+    <Card sx={{ p: 4, width: 400 }} >
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <InputText
+          label="Username"
+          name="username"
+          defaultValue="goklas"
+          register={register}
+          error={errors.username}
         />
-        <input
+        <InputPassword
+          label="Password"
           type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          name="password"
+          defaultValue="23"
+          register={register}
+          error={errors.password}
         />
-        <button type="submit">Login</button>
+        <Button type="submit" variant="contained" color="primary">
+          Login
+        </Button>
       </form>
-    </div>
+    </Card>
   );
 };
 
