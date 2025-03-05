@@ -1,11 +1,16 @@
+import { Box } from "@mui/material";
 import React from "react";
+import Navbar from "./container/Navbar";
 
 const AdminLayout = ({ children }) => {
   return (
-    <div>
-      <nav>Admin Navigation</nav>
+    <Box sx={{
+      display: "flex",
+      // flexDirection: "column",
+    }}>
+      <Navbar/>
       <main>{children}</main>
-    </div>
+    </Box>
   );
 };
 
