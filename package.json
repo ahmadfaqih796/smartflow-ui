@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.8.1",
     "crypto-js": "^4.2.0",
+    "http-proxy-middleware": "^3.0.3",
     "js-cookie": "^3.0.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -42,6 +43,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "https://dev.dikahadir.com/flowapi"
+  }
 }
