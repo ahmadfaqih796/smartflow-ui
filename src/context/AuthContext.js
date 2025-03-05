@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
       setToken(response.data.Token);
       fetchUser();
     } catch (error) {
-      console.error("Login gagal:", error);
+      throw error;
     }
   };
 
