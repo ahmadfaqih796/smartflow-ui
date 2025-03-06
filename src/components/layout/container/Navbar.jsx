@@ -1,9 +1,10 @@
-import { Box, Button, useMediaQuery } from "@mui/material";
+import { Avatar, Box, Button, useMediaQuery } from "@mui/material";
 import React from "react";
-import { MENU_ROUTE } from "../../../router/menuRoute";
-import { COLOR } from "../../../design/color";
-import { useAuth } from "../../../context/AuthContext";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../../../context/AuthContext";
+import { COLOR } from "../../../design/color";
+import { MENU_ROUTE } from "../../../router/menuRoute";
+import SidebarTooltip from "../../common/tooltip/SidebarTooltip";
 
 const MobileAppBar = () => {
   return <Box>MobileAppBar</Box>;
@@ -22,17 +23,15 @@ const DesktopAppBar = ({ onLogout }) => {
         //   gap: "10px",
       }}
     >
-      <Box
+      <Avatar
+        alt="User"
         sx={{
-          padding: "5px",
-          border: "1px solid black",
-          cursor: "pointer",
-          color: "black",
-          borderRadius: "50%",
+          my: 2,
+          width: 75,
+          height: 75,
         }}
-      >
-        Logo
-      </Box>
+        src="/logoF.png"
+      />
       <Box
         sx={{
           display: "flex",
@@ -46,10 +45,25 @@ const DesktopAppBar = ({ onLogout }) => {
         }}
       >
         <Box>
-          {MENU_ROUTE.map(({ path, name }) => (
-            <Box key={path} sx={{ cursor: "pointer" }}>
-              <NavLink to={path}>{name}</NavLink>
-            </Box>
+          {MENU_ROUTE.map(({ path, name, icon }) => (
+            <SidebarTooltip key={path} title={name}>
+              <NavLink
+                act
+                to={path}
+                style={{
+                  backgroundColor: path === window.location.pathname ? COLOR.warning : "transparent",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "15px",
+                  textDecoration: "none",
+                  color: "white",
+                  transition: "0.3s",
+                }}
+              >
+                {icon}
+              </NavLink>
+            </SidebarTooltip>
           ))}
         </Box>
         <Button

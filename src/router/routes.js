@@ -12,7 +12,8 @@ const AppRouter = () => {
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
 
           {MENU_ROUTE.map(({ path, element: Component, layout }) => {

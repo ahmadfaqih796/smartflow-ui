@@ -62,8 +62,9 @@ const Sidebar = () => {
             gap: 2,
           }}
         >
-          {Array.from({ length: 2 }).map((_, index) => (
+          {Array.from({ length: 3 }).map((_, index) => (
             <Box
+              key={index}
               sx={{
                 backgroundColor: COLOR.warning,
                 borderRadius: "30px 0 0 30px",
@@ -75,11 +76,15 @@ const Sidebar = () => {
                 sx={{
                   backgroundColor: "white",
                   borderRadius: "20px 0 0 20px",
-                  p: 2,
+                  px: 2,
+                  py: 1,
                 }}
               >
-                <Typography variant="body1" key={index}>
+                <Typography variant="body1">
                   Task {index + 1}
+                </Typography>
+                <Typography variant="caption">
+                  Description {index + 1}
                 </Typography>
               </Box>
             </Box>
