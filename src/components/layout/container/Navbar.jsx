@@ -51,7 +51,7 @@ const DesktopAppBar = ({ onLogout }) => {
                 act
                 to={path}
                 style={{
-                  backgroundColor: path === window.location.pathname ? COLOR.warning : "transparent",
+                  backgroundColor: path === window.location.pathname ? "green" : "transparent",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
