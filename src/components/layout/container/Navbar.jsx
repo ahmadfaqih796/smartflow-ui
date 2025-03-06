@@ -5,6 +5,7 @@ import { useAuth } from "../../../context/AuthContext";
 import { COLOR } from "../../../design/color";
 import { MENU_ROUTE } from "../../../router/menuRoute";
 import SidebarTooltip from "../../common/tooltip/SidebarTooltip";
+import { Logout } from "@mui/icons-material";
 
 const MobileAppBar = () => {
   return <Box>MobileAppBar</Box>;
@@ -74,9 +75,10 @@ const DesktopAppBar = ({ onLogout }) => {
             borderRadius: "0 50px 50px 0",
             width: "135px",
             color: "white",
+            
           }}
         >
-          Keluar
+         <Logout />
         </Button>
       </Box>
     </Box>
