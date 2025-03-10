@@ -1,16 +1,20 @@
+import { CardContent, Divider, Typography } from "@mui/material";
 import React from "react";
-import { useAuth } from "../context/AuthContext";
+import BaseCard from "../components/common/card/BaseCard";
 
 const Dashboard = () => {
-  const { logout } = useAuth();
-
-  const handleLogout = async () => {
-    await logout();
-  };
   return (
     <div>
-      Dashboard
-      <button onClick={handleLogout}>Logout</button>
+      <BaseCard>
+        <Typography variant="h6" textAlign="center" p={2}>
+          Please enter the barcode here for real-time and accurate document
+          tracking
+        </Typography>
+        <Divider />
+        <CardContent>
+          Hello Barcode
+        </CardContent>
+      </BaseCard>
     </div>
   );
 };
