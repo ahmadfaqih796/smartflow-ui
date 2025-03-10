@@ -49,7 +49,6 @@ const DesktopAppBar = ({ onLogout }) => {
           {MENU_ROUTE.map(({ path, name, icon }) => (
             <SidebarTooltip key={path} title={name}>
               <NavLink
-                act
                 to={path}
                 style={{
                   backgroundColor: path === window.location.pathname ? "green" : "transparent",
