@@ -1,11 +1,14 @@
 import React from "react";
 import TrackingCard from "../features/dashboard/TrackingCard";
+import DocumentCard from "../features/dashboard/DocumentCard";
+import { Box } from "@mui/material";
 
 const Dashboard = () => {
   return (
-    <div>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       <TrackingCard />
-    </div>
+      <DocumentCard />
+    </Box>
   );
 };
 
