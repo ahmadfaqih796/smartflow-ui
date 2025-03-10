@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Button, Card, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -7,9 +7,9 @@ import * as yup from "yup";
 import { InputPassword, InputText } from "../components/common/input";
 import { useAlert } from "../context/AlertContext";
 import { useAuth } from "../context/AuthContext";
-import { encryptPassword } from "../utils/generatePassword";
 import { COLOR } from "../design/color";
 import useResponsive from "../hooks/useResponsive";
+import { encryptPassword } from "../utils/generatePassword";
 
 const schema = yup.object().shape({
   username: yup.string().required("Username wajib diisi"),
@@ -79,7 +79,7 @@ const Login = () => {
         <Box
           sx={{
             p: 4,
-            width: 400,
+            width: isMobile ? "300px" : "400px",
             position: "absolute",
             top: "50%",
             transform: "translateY(-50%)",
@@ -91,7 +91,7 @@ const Login = () => {
           <Typography variant="caption" fontWeight={600} color={COLOR.gray}>
             Enter your username and password to sign in
           </Typography>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form style={{ marginTop: "20px" }} onSubmit={handleSubmit(onSubmit)}>
             <InputText
               label="Username"
               name="username"
