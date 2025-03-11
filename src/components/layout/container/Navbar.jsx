@@ -2,7 +2,7 @@ import { Avatar, Box, Button, useMediaQuery } from "@mui/material";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
-import { COLOR } from "../../../design/color";
+import { COLOR } from "../../../constants/color";
 import { MENU_ROUTE } from "../../../router/menuRoute";
 import SidebarTooltip from "../../common/tooltip/SidebarTooltip";
 import { Logout } from "@mui/icons-material";

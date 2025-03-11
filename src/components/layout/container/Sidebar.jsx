@@ -1,6 +1,6 @@
 import { Avatar, Box, Typography } from "@mui/material";
 import React from "react";
-import { COLOR } from "../../../design/color";
+import { COLOR } from "../../../constants/color";
 
 const Sidebar = () => {
   return (

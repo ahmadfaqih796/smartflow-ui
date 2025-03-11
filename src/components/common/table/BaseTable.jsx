@@ -83,20 +83,26 @@ const ReactVirtualizedTable = ({ columns, rows }) => {
     </StyledTableRow>
   );
 
-  const renderRowContent = (_index, row) => (
+  const renderRowContent = (index, row) => (
     <>
-      {columns.map((column) => (
-        <TableCell
-          key={column.dataKey}
-          align={column.numeric ? "right" : "left"}
-          style={{
-            overflowWrap: "break-word",
-          }}
-        >
-          {}
-          {row[column.dataKey]}
-        </TableCell>
-      ))}
+      {columns.map((column) => {
+        const cellValue = row[column.dataKey];
+        const formattedValue = column.formatter
+          ? column.formatter(cellValue, row, index)
+          : cellValue;
+
+        return (
+          <TableCell
+            key={column.dataKey}
+            align={column.numeric ? "right" : "left"}
+            style={{
+              overflowWrap: "break-word",
+            }}
+          >
+            {formattedValue}
+          </TableCell>
+        );
+      })}
     </>
   );
 

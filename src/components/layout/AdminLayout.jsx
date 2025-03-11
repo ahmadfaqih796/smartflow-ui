@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import React from "react";
 import Navbar from "./container/Navbar";
-import { COLOR } from "../../design/color";
+import { COLOR } from "../../constants/color";
 import Sidebar from "./container/Sidebar";
 
 const AdminLayout = ({ children }) => {

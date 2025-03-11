@@ -7,7 +7,7 @@ import * as yup from "yup";
 import { InputPassword, InputText } from "../components/common/input";
 import { useAlert } from "../context/AlertContext";
 import { useAuth } from "../context/AuthContext";
-import { COLOR } from "../design/color";
+import { COLOR } from "../constants/color";
 import useResponsive from "../hooks/useResponsive";
 import { encryptPassword } from "../utils/generatePassword";
 

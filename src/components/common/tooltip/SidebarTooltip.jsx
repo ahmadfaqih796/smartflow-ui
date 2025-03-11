@@ -1,6 +1,6 @@
 import { Box, Tooltip, tooltipClasses, Typography } from "@mui/material";
 import React from "react";
-import { COLOR } from "../../../design/color";
+import { COLOR } from "../../../constants/color";
 
 const SidebarTooltip = ({ title, children, ...props }) => {
   return (
