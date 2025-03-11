@@ -1,15 +1,15 @@
 import { CardContent, Divider, Typography } from "@mui/material";
 import React from "react";
 import BaseCard from "../../components/common/card/BaseCard";
-import { yupResolver } from "@hookform/resolvers/yup";
+// import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
+// import * as yup from "yup";
 import { useAlert } from "../../context/AlertContext";
 import { InputText } from "../../components/common/input";
 
-const schema = yup.object().shape({
-  barcode: yup.string().required("Barcode wajib diisi"),
-});
+// const schema = yup.object().shape({
+//   barcode: yup.string().required("Barcode wajib diisi"),
+// });
 
 const TrackingCard = () => {
   const { showAlert } = useAlert();
@@ -18,7 +18,7 @@ const TrackingCard = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    // resolver: yupResolver(schema),
   });
 
   const onSubmit = async (data) => {
