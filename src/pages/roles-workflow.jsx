@@ -1,10 +1,12 @@
 import React from "react";
 import { InputSearch } from "../components/common/input";
+import FormSearch from "../components/reusable/FormSearch";
 
 const rolesWorkflow = () => {
+   
   return (
     <div>
-      <InputSearch />
+      <FormSearch />
       rolesWorkflow
     </div>
   );

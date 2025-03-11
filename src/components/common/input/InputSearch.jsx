@@ -29,7 +29,7 @@ export const InputSearch = () => {
         sx={{
           display: "flex",
           alignItems: "center",
-          width: 500,
+          width: "100%",
           borderRadius: "20px",
          boxShadow: "0px 4px 10px transparent",
         }}
