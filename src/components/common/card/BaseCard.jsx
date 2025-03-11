@@ -1,6 +1,6 @@
 import { Card, styled } from "@mui/material";
 import React from "react";
-import { COLOR } from "../../../design/color";
+import { COLOR } from "../../../constants/color";
 
 const CssCard = styled(Card)({
   // width: '100%',
