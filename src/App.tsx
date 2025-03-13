@@ -1,11 +1,11 @@
 import { ThemeProvider } from "./context/ThemeContext";
-import Home from "./pages/Home";
+import AppRoutes from "./routes";
 
 function App() {
 
   return (
     <ThemeProvider>
-      <Home />
+      <AppRoutes />
     </ThemeProvider>
   );
 }
