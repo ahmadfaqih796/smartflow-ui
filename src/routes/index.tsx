@@ -8,6 +8,7 @@ import {
 import AuthGuard from "./AuthGuard";
 import { routeConfig } from "./routerConfig";
 import AdminLayout from "@/templates/AdminLayout";
+import LoginPage from "@/pages/auth/login";
 
 const pages = import.meta.glob("/src/pages/**/*.tsx", { eager: true }) as {
   [key: string]: any;
@@ -30,14 +31,12 @@ const AppRoutes = () => {
     <Router>
       <Suspense fallback={<div>Loading.....</div>}>
         <Routes>
-          {/* Public Routes */}
-          <Route path="/" element={<div>login</div>} />
+          <Route path="/" element={<LoginPage />} />
           <Route
             path="/login"
             element={!user ? <div>login</div> : <Navigate to="/dashboard" />}
           />
 
-          {/* Dynamically generated routes */}
           {Object.keys(pages).map((filePath: string) => {
             const Component = pages[filePath].default;
             const routePath = generateRoutePath(filePath)?.toLowerCase();

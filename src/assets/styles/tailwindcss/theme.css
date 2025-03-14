@@ -1,0 +1,19 @@
+/* https://tailwindcss.com/docs/theme */
+@theme static {
+   /* colors */
+   --color-primary: #85d5d0;
+   --color-dark-primary: var(--color-red-500);
+   --color-secondary: var(--color-blue-500);
+
+   /* font */
+   --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+   --font-script: Great Vibes, cursive;
+ }
+
+ /* @theme static {
+   --color-primary: var(--color-red-500);
+   --color-dark-primary: var(--color-red-500);
+   --color-secondary: var(--color-blue-500);
+ } */

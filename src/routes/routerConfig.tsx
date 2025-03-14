@@ -31,5 +31,5 @@ export const routeConfig = (routePath: any) => {
     }
     return { allowedRoles, requiredDivision };
   }
-  return { allowedRoles: [], requiredDivision: [] };
+  return { allowedRoles: null, requiredDivision: null };
 };
