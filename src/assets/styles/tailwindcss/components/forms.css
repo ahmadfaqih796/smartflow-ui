@@ -97,5 +97,28 @@
       color: var(--color-blue-400);
     }
   }
+
+  .eye-toggle {
+   position: absolute;
+   top: 50%;
+   right: 10px;
+   transform: translateY(-50%);
+   background: none;
+   border: none;
+   cursor: pointer;
+   color: var(--color-gray-500);
+ }
+ 
+ .eye-toggle:hover {
+   color: var(--color-gray-700);
+ }
+ 
+ .dark .eye-toggle {
+   color: var(--color-gray-300);
+ }
+ 
+ .dark .eye-toggle:hover {
+   color: var(--color-gray-100);
+ }
   
 }
