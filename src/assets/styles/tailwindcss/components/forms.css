@@ -1,0 +1,101 @@
+@layer components {
+  .form-group {
+    margin-bottom: calc(var(--spacing) * 6);
+    label {
+      display: block;
+      margin-bottom: calc(var(--spacing) * 2);
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--text-sm);
+      color: var(--color-gray-700);
+    }
+    input {
+      display: block;
+      width: 100%;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-gray-300);
+      padding: calc(var(--spacing) * 3);
+      font-size: var(--text-sm);
+      color: var(--color-gray-700);
+      background-color: var(--color-gray-50);
+    }
+  }
+
+  .dark {
+    .form-group {
+      background-color: var(--color-gray-800) !important;
+      label {
+        color: var(--color-gray-50) !important;
+      }
+      input {
+        background-color: var(--color-gray-700) !important;
+        color: var(--color-gray-50) !important;
+        border: 1px solid var(--color-gray-600) !important;
+      }
+    }
+  }
+
+  /* From V2 */
+  .form-group-v2 {
+    position: relative;
+    margin-bottom: calc(var(--spacing) * 6);
+    .form-label {
+      position: absolute;
+      top: 50%;
+      left: calc(var(--spacing) * 3);
+      transform: translateY(-50%);
+      font-size: var(--text-sm);
+      color: var(--color-gray-500);
+      background-color: var(--color-gray-50);
+      border-radius: var(--radius-md);
+      border: 0px;
+      padding: 0 5px;
+      transition: all 0.3s ease-in-out;
+      pointer-events: none;
+    }
+    .form-input:focus ~ .form-label,
+    .form-input:not(:placeholder-shown) ~ .form-label {
+      top: 0px;
+      left: 10px;
+      font-size: 12px;
+      border: 1px solid var(--color-blue-500);
+      border-radius: var(--radius-md);
+      color: var(--color-blue-500);
+    }
+    .form-input {
+      width: 100%;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-gray-300);
+      padding: calc(var(--spacing) * 3);
+      font-size: var(--text-sm);
+      color: var(--color-gray-700);
+      background-color: var(--color-gray-50);
+      transition: all 0.3s ease-in-out;
+    }
+    .form-input:focus {
+      border-color: var(--color-blue-500);
+      box-shadow: 0 0 5px var(--color-blue-300);
+      outline: none;
+    }
+  }
+
+  .dark {
+    .form-label {
+      color: var(--color-gray-400);
+      background-color: var(--color-gray-700);
+    }
+    .form-input {
+      background-color: var(--color-gray-700);
+      color: var(--color-gray-50);
+      border: 1px solid var(--color-gray-600);
+    }
+    .form-input:focus {
+      border-color: var(--color-blue-400);
+      box-shadow: 0 0 5px var(--color-blue-500);
+    }
+    .form-input:focus ~ .form-label,
+    .form-input:not(:placeholder-shown) ~ .form-label {
+      color: var(--color-blue-400);
+    }
+  }
+  
+}

@@ -1,3 +1,4 @@
+import { InputField } from "@/components/forms/InputField";
 import { useTheme } from "@/context/ThemeContext";
 
 const LoginPage = () => {
@@ -9,7 +10,8 @@ const LoginPage = () => {
         <button onClick={toggleTheme}>Toggle Theme</button>
         <div className="card-header typography">
           <h1 className="text-center">Login</h1>
-          
+          <InputField label="Email" name="email" />
+          <InputField label="Password" name="password" type="password" />
         </div>
       </div>
     </div>
