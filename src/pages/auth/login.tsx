@@ -5,10 +5,10 @@ const LoginPage = () => {
   const { toggleTheme } = useTheme();
 
   return (
-    <div className="card dark:bg-dark-primary">
+    <div className="card">
       <button onClick={toggleTheme}>Toggle Theme</button>
-      <div className="typography">
-        <h1 className="text-primary dark:text-secondary">login</h1>
+      <div className="card-header typography">
+        <h1>login</h1>
       </div>
     </div>
   );

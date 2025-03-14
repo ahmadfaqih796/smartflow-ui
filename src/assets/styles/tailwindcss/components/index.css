@@ -1,0 +1,9 @@
+@layer components;
+@import "./card.css" layer(components);
+@import "./typography.css" layer(components);
+
+@layer components {
+  .dark {
+    background-color: var(--color-green-50);
+  }
+}

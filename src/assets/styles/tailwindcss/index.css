@@ -1,4 +1,4 @@
 @layer theme, base, components, utilities;
 @import "./theme.css" layer(theme);
+@import './components/index.css';
 /* @import "./refrence.css" layer(theme); */
-@import "./components.css" layer(components);
