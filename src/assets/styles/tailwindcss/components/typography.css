@@ -1,14 +1,14 @@
 @layer components {
- 
-   .typography {
+   
+  .typography {
     p {
       font-size: var(--text-base);
       color: var(--color-gray-700);
     }
     h1 {
-      font-size: var(--text-2xl--line-height);
+      font-size: var(--text-2xl);
       font-weight: var(--font-weight-semibold);
-      color: var(--color-red-700);
+      /* color: var(--color-red-700); */
       font-family: var(--font-script);
     }
     h2 {
@@ -17,13 +17,10 @@
       color: var(--color-gray-950);
     }
   }
- 
- 
-   .dark {
-     h1 {
-       color: var(--color-gray-100) !important;
-     }
-   }
-   
- }
- 
+
+  .dark {
+    h1 {
+      color: var(--color-gray-100) !important;
+    }
+  }
+}

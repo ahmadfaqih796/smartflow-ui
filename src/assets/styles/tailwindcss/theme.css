@@ -1,6 +1,8 @@
 /* https://tailwindcss.com/docs/theme */
 @theme static {
    /* colors */
+   --color-layout: var(--color-green-50);
+   --color-dark-layout: var(--color-green-950);
    --color-primary: #85d5d0;
    --color-dark-primary: var(--color-red-500);
    --color-secondary: var(--color-blue-500);
@@ -12,8 +14,8 @@
    --font-script: Great Vibes, cursive;
  }
 
- /* @theme static {
-   --color-primary: var(--color-red-500);
-   --color-dark-primary: var(--color-red-500);
-   --color-secondary: var(--color-blue-500);
- } */
+ @layer components {
+   .dark {
+    color: var(--color-gray-50);
+   }
+ }

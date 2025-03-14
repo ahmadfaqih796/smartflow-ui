@@ -2,10 +2,11 @@ import { ThemeProvider } from "./context/ThemeContext";
 import AppRoutes from "./routes";
 
 function App() {
-
   return (
     <ThemeProvider>
-      <AppRoutes />
+      <div className="bg-layout dark:bg-dark-layout">
+        <AppRoutes />
+      </div>
     </ThemeProvider>
   );
 }
