@@ -1,27 +1,44 @@
-import axios from "axios";
+import axios, {
+  AxiosError,
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+} from "axios";
 import Cookies from "js-cookie";
-import { AxiosInstance, AxiosRequestConfig } from "axios";
 
-type ErrorResponse = {
+type Result<T = any> = {
+  status: number;
   message: string;
-  response?: any
-}
+  data?: T;
+};
 
 class HttpClient {
   instance: AxiosInstance;
   constructor() {
     this.instance = axios.create({
-      baseURL: "/api",
+      baseURL: "https://dev.dikahadir.com/flowapi",
       responseType: "json",
       headers: {
         "Content-Type": "application/json",
         Authorization: Cookies.get("token"),
       },
     });
+
     this.instance.interceptors.request.use(
-      (response: any) => response,
-      (error: { response: { data: { message: string } } }) => {
-        if (error?.response?.data?.message === "Invalid Token") {
+      (config) => {
+        const token = Cookies.get("token");
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+      },
+      (error: AxiosError) => Promise.reject(error)
+    );
+    
+    this.instance.interceptors.response.use(
+      (response) => response,
+      (error: AxiosError<Result>) => {
+        if (error.response?.status === 401) {
           window.location.href = `/auth/login?sessionExpired=true`;
         }
         return Promise.reject(error);
@@ -29,19 +46,33 @@ class HttpClient {
     );
   }
 
-  get(url: any, config: AxiosRequestConfig) {
+  async get<T = any>(
+    url: string,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<Result<T>>> {
     return this.instance.get(url, config);
   }
 
-  post(url: any, data: any, config: AxiosRequestConfig) {
+  async post<T = any>(
+    url: string,
+    data: any,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<Result<T>>> {
     return this.instance.post(url, data, config);
   }
 
-  put(url: any, data: any, config: AxiosRequestConfig) {
+  async put<T = any>(
+    url: string,
+    data: any,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<Result<T>>> {
     return this.instance.put(url, data, config);
   }
 
-  delete(url: any, config: AxiosRequestConfig) {
+  async delete<T = any>(
+    url: string,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<Result<T>>> {
     return this.instance.delete(url, config);
   }
 }
