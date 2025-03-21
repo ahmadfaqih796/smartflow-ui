@@ -16,7 +16,7 @@ class HttpClient {
   instance: AxiosInstance;
   constructor() {
     this.instance = axios.create({
-      baseURL: "https://dev.dikahadir.com/flowapi",
+      baseURL: "/api",
       responseType: "json",
       headers: {
         "Content-Type": "application/json",
