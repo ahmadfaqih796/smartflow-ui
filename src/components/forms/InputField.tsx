@@ -6,6 +6,8 @@ type Props = {
   placeholder?: string;
   type?: "text" | "password" | "number";
   name?: string;
+  register?: any;
+  error?: any;
   version?: "v1" | "v2";
 };
 
@@ -20,26 +22,36 @@ export const InputField = ({
 
   if (version === "v1") {
     return (
-      <div className="form-group-v2">
-        <input
-          className={`form-input ${type === "password" ? "pr-10" : ""}`}
-          id={props.name}
-          type={
-            type === "password" ? (showPassword ? "text" : "password") : type
-          }
-          placeholder={props.placeholder ? props.placeholder : ""}
-          {...props}
-        />
-        {label && (
-          <label htmlFor={props.name} className="form-label">
-            {label}
-          </label>
-        )}
-        {type === "password" && (
-          <button type="button" className="eye-toggle" onClick={togglePassword}>
-            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-          </button>
-        )}
+      <div>
+        <div className="form-group-v2">
+          <input
+            {...props?.register}
+            className={`form-input ${type === "password" ? "pr-10" : ""}`}
+            id={props.name}
+            type={
+              type === "password" ? (showPassword ? "text" : "password") : type
+            }
+            placeholder={props.placeholder ? props.placeholder : ""}
+            {...props}
+          />
+          {label && (
+            <label htmlFor={props.name} className="form-label">
+              {label}
+            </label>
+          )}
+          {type === "password" && (
+            <button
+              type="button"
+              className="eye-toggle"
+              onClick={togglePassword}
+            >
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
+          )}
+        </div>
+          {props.error && (
+            <p className="text-red-500 mb-3">{props.error?.message}</p>
+          )}
       </div>
     );
   } else {
@@ -48,6 +60,7 @@ export const InputField = ({
         {label && <label htmlFor={props.name}>{label}</label>}
         <div className="relative">
           <input
+            {...props?.register}
             id={props.name}
             className={`form-input ${type === "password" ? "pr-10" : " "}`}
             type={
@@ -63,6 +76,9 @@ export const InputField = ({
             >
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
+          )}
+          {props.error && (
+            <p className="text-red-500">{props.error?.message}</p>
           )}
         </div>
       </div>
