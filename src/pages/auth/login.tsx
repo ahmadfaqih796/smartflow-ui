@@ -1,6 +1,7 @@
 import { InputField } from "@/components/forms/InputField";
 import { useTheme } from "@/context/ThemeContext";
 import AuthService from "@/lib/services/AuthService";
+import { encryptPassword } from "@/utils/generatePassword";
 
 const service = new AuthService();
 
@@ -10,7 +11,7 @@ const LoginPage = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const username = event.currentTarget.username.value;
-    const password = event.currentTarget.password.value;
+    const password = encryptPassword(event.currentTarget.password.value);
     try {
       const response = service.login({ username, password });
       console.log("response", response)
