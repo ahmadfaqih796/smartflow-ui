@@ -1,4 +1,5 @@
 import { InputField } from "@/components/forms/InputField";
+import { useAlert } from "@/context/AlertContext";
 import { useTheme } from "@/context/ThemeContext";
 import AuthService from "@/lib/services/AuthService";
 import { encryptPassword } from "@/utils/generatePassword";
@@ -18,6 +19,7 @@ const schema = yup.object().shape({
 
 const LoginPage = () => {
   const { toggleTheme } = useTheme();
+  const { showAlert } = useAlert();
 
   const {
     register,
@@ -36,7 +38,9 @@ const LoginPage = () => {
         username: data.username,
         password: encryptPassword(data.password),
       });
+      showAlert("Login Berhasil", "success");
     } catch (error) {
+      showAlert("Login Gagal", "error");
       console.error("Login gagal:", error);
     }
   };

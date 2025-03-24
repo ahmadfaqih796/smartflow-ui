@@ -22,7 +22,7 @@ export const InputField = ({
 
   if (version === "v1") {
     return (
-      <div className="mb-3">
+      <div className="mb-5">
         <div className="form-group-v2">
           <input
             {...props?.register}
