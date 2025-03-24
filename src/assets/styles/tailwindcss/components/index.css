@@ -2,3 +2,4 @@
 @import "./card.css" layer(components);
 @import "./typography.css" layer(components);
 @import "./forms.css" layer(components);
+@import "./snackbar.css" layer(components);

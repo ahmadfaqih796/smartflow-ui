@@ -1,6 +1,13 @@
 import { Snackbar } from "@/components/alert/Snackbar";
 import React from "react";
 
+type Props = {
+   open: boolean;
+   message: string;
+   severity: "success" | "info" | "warning" | "error";
+   onClose?: () => void;
+};
+
 export const AlertContext = React.createContext({
   alert: {
     open: false,
@@ -11,7 +18,7 @@ export const AlertContext = React.createContext({
 });
 
 export const AlertProvider = ({ children }: any) => {
-  const [alert, setAlert] = React.useState({
+  const [alert, setAlert] = React.useState<Props>({
     open: false,
     severity: "success",
     message: "",
@@ -20,9 +27,13 @@ export const AlertProvider = ({ children }: any) => {
   const showAlert = (message = "", severity = "success") => {
     setAlert({
       open: true,
-      severity,
+      severity : severity as "success" | "info" | "warning" | "error",
       message,
     });
+
+    setTimeout(() => {
+      setAlert((prev) => ({ ...prev, open: false }));
+    }, 2000);
   };
 
   const handleClose = () => {
@@ -36,7 +47,7 @@ export const AlertProvider = ({ children }: any) => {
   return (
     <AlertContext.Provider value={{ alert, showAlert }}>
       {children}
-      <Snackbar message={alert.message} severity={alert.severity} onClose={handleClose} />
+      <Snackbar open={alert.open} message={alert.message} severity={alert.severity} onClose={handleClose} />
     </AlertContext.Provider>
   );
 };

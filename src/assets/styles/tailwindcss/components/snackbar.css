@@ -1,0 +1,32 @@
+@layer components {
+   
+   .snackbar {
+     position: fixed;
+     bottom: 20px;
+     left: 20px;
+     padding: 10px 20px;
+     border-radius: var(--radius-md);
+     box-shadow: var(--shadow-lg);
+   }
+
+   .snackbar-success {
+     background-color: var(--color-green-500);
+     color: var(--color-gray-50);
+   }
+   
+   .snackbar-error {
+     background-color: var(--color-red-500);
+     color: var(--color-gray-50);
+   }
+ 
+   .dark {
+     .snackbar-success {
+       background-color: var(--color-green-600) !important;
+     }
+     
+     .snackbar-error {
+       background-color: var(--color-red-600) !important;
+     }
+   }
+ }
+ 
