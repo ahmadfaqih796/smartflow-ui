@@ -37,7 +37,7 @@
   /* From V2 */
   .form-group-v2 {
     position: relative;
-    margin-bottom: calc(var(--spacing) * 3);
+    margin-bottom: calc(var(--spacing) * 1);
     .form-label {
       position: absolute;
       top: 50%;
@@ -76,6 +76,11 @@
       box-shadow: 0 0 5px var(--color-blue-300);
       outline: none;
     }
+  }
+  /* text error */
+  .form-text-error {
+    color: var(--color-red-500);
+    font-size: var(--text-sm);
   }
 
   .dark {

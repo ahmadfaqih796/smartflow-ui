@@ -4,7 +4,7 @@
      background-color: var(--color-gray-50);
      border-radius: var(--radius-lg);
      box-shadow: var(--shadow-xl);
-     transition: all 0.5s ease-in-out;
+     transition: all 0.5s ease-out;
      .card-header {
        padding: calc(var(--spacing) * 4);
      }

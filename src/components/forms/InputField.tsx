@@ -22,7 +22,7 @@ export const InputField = ({
 
   if (version === "v1") {
     return (
-      <div>
+      <div className="mb-3">
         <div className="form-group-v2">
           <input
             {...props?.register}
@@ -50,7 +50,7 @@ export const InputField = ({
           )}
         </div>
           {props.error && (
-            <p className="text-red-500 mb-3">{props.error?.message}</p>
+            <span className="form-text-error">{props.error?.message}</span>
           )}
       </div>
     );
