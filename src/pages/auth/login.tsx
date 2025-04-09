@@ -5,6 +5,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
 import { encryptPassword } from "@/utils/generatePassword";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { MoonStar, Sun } from "lucide-react";
 import React from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -18,7 +19,7 @@ const schema = yup.object().shape({
 });
 
 const LoginPage = () => {
-  const { toggleTheme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
   const { showAlert } = useAlert();
   const { login } = useAuth();
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -42,7 +43,7 @@ const LoginPage = () => {
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      showAlert("Login Gagal", "error");
+      showAlert((error as any)?.response?.data?.message || "Login Gagal", "error");
       console.error("Login gagal:", error);
     }
   };
@@ -75,10 +76,13 @@ const LoginPage = () => {
               Masuk
             </Button>
           </div>
-          <div className="card-body">
-            <button onClick={toggleTheme}>Toggle Theme</button>
-          </div>
         </form>
+        <div className="card-body">
+          {/* {theme} */}
+          <button onClick={toggleTheme}>
+            {theme === "light" ? <MoonStar /> : <Sun />}
+          </button>
+        </div>
       </div>
     </div>
   );

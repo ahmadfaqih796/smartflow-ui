@@ -11,7 +11,7 @@ export const Snackbar = ({ open = false, message, severity = "success", onClose 
     <div className={`snackbar snackbar-${severity} ${open ? "block" : "hidden"}`}>
       {message}
       {onClose && (
-        <button className="bg-secondary" onClick={onClose}>
+        <button className="ml-2 font-bold text-xl mb-1" onClick={onClose}>
           &times;
         </button>
       )}

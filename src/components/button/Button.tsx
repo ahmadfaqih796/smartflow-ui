@@ -7,6 +7,7 @@ type Props = {
   type?: "submit" | "reset" | "button";
   variant?: "success" | "danger" | "warning" | "info";
   fullwidth?: boolean;
+  onClick?: () => void;
 };
 
 export const Button = ({ children, ...props }: Props) => {

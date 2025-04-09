@@ -1,4 +1,4 @@
-import { Eye, EyeOff } from "lucide-react"; // Pastikan kamu punya lucide-react
+import { Eye, EyeOff } from "lucide-react";
 import React from "react";
 
 type Props = {
