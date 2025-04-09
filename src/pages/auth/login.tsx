@@ -38,6 +38,8 @@ const LoginPage = () => {
         username: data.username,
         password: encryptPassword(data.password),
       });
+      console.log("masuuuu", response)
+      
       showAlert("Login Berhasil", "success");
     } catch (error) {
       showAlert("Login Gagal", "error");
