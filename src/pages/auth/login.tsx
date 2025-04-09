@@ -1,9 +1,11 @@
+import { Button } from "@/components/button/Button";
 import { InputField } from "@/components/forms/InputField";
 import { useAlert } from "@/context/AlertContext";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
 import { encryptPassword } from "@/utils/generatePassword";
 import { yupResolver } from "@hookform/resolvers/yup";
+import React from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
@@ -19,6 +21,7 @@ const LoginPage = () => {
   const { toggleTheme } = useTheme();
   const { showAlert } = useAlert();
   const { login } = useAuth();
+  const [loading, setLoading] = React.useState<boolean>(false);
 
   const {
     register,
@@ -29,13 +32,16 @@ const LoginPage = () => {
   });
 
   const onSubmit = async (data: any) => {
+    setLoading(true);
     try {
       await login({
         username: data.username,
         password: encryptPassword(data.password),
       });
       showAlert("Login Berhasil", "success");
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       showAlert("Login Gagal", "error");
       console.error("Login gagal:", error);
     }
@@ -43,11 +49,10 @@ const LoginPage = () => {
 
   return (
     <div className="flex justify-center items-center w-[100vw] h-[100vh]">
-      <div className="card w-[90%] sm:w-[400px]">
-        <button onClick={toggleTheme}>Toggle Theme</button>
+      <div className="card w-[90%] sm:w-[400px] px-4">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="card-header typography">
-            <h1 className="text-center">Login</h1>
+            <h1 className="text-center mb-7">Login</h1>
             <InputField
               label="Username"
               name="username"
@@ -61,8 +66,18 @@ const LoginPage = () => {
               register={register("password")}
               error={errors.password}
             />
+            <Button
+              disabled={loading}
+              fullwidth
+              variant="success"
+              type="submit"
+            >
+              Masuk
+            </Button>
           </div>
-          <button type="submit">Masuk</button>
+          <div className="card-body">
+            <button onClick={toggleTheme}>Toggle Theme</button>
+          </div>
         </form>
       </div>
     </div>
