@@ -1,13 +1,11 @@
 import { InputField } from "@/components/forms/InputField";
 import { useAlert } from "@/context/AlertContext";
+import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
-import AuthService from "@/lib/services/AuthService";
 import { encryptPassword } from "@/utils/generatePassword";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-
-const service = new AuthService();
 
 const schema = yup.object().shape({
   username: yup.string().required("Username wajib diisi"),
@@ -20,6 +18,7 @@ const schema = yup.object().shape({
 const LoginPage = () => {
   const { toggleTheme } = useTheme();
   const { showAlert } = useAlert();
+  const { login } = useAuth();
 
   const {
     register,
@@ -29,17 +28,12 @@ const LoginPage = () => {
     resolver: yupResolver(schema),
   });
 
-  console.log("Errors:", errors);
-
   const onSubmit = async (data: any) => {
-    console.log("msssss", data);
     try {
-      const response = await service.login({
+      await login({
         username: data.username,
         password: encryptPassword(data.password),
       });
-      console.log("masuuuu", response)
-      
       showAlert("Login Berhasil", "success");
     } catch (error) {
       showAlert("Login Gagal", "error");
