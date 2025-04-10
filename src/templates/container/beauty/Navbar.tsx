@@ -1,6 +1,6 @@
 import React from 'react'
 
-const MobileAppBar = () => {
+const MobileAppBar : React.FC = () => {
    return <div className='md:hidden'>MobileAppBar</div>;
  };
 
