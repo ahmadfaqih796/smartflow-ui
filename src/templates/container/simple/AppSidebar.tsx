@@ -1,9 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router";
 
-import {
-  ChevronDownIcon
-} from "@/assets/icons";
+import { ChevronDownIcon } from "@/assets/icons";
 import { useSidebar } from "@/context/SidebarContext";
 import { MENU_ROUTE } from "@/routes/menuRoute";
 
@@ -66,13 +64,10 @@ const AppSidebar: React.FC = () => {
 
   const handleSubmenuToggle = (index: number) => {
     setOpenSubmenu((prevOpenSubmenu) => {
-      if (
-        prevOpenSubmenu &&
-        prevOpenSubmenu.index === index
-      ) {
+      if (prevOpenSubmenu && prevOpenSubmenu.index === index) {
         return null;
       }
-      return {  index };
+      return { index };
     });
   };
 
@@ -84,7 +79,7 @@ const AppSidebar: React.FC = () => {
             <button
               onClick={() => handleSubmenuToggle(index)}
               className={`menu-item group ${
-                 openSubmenu?.index === index
+                openSubmenu?.index === index
                   ? "menu-item-active"
                   : "menu-item-inactive"
               } cursor-pointer ${
@@ -108,7 +103,6 @@ const AppSidebar: React.FC = () => {
               {(isExpanded || isHovered || isMobileOpen) && (
                 <ChevronDownIcon
                   className={`ml-auto w-5 h-5 transition-transform duration-200 ${
-                    
                     openSubmenu?.index === index
                       ? "rotate-180 text-brand-500"
                       : ""
@@ -224,22 +218,24 @@ const AppSidebar: React.FC = () => {
             <>
               <img
                 className="dark:hidden"
-                src="/images/logo/logo.svg"
+                // src="/images/logo/logo.svg"
+                src="/images/logo/flow.png"
                 alt="Logo"
-                width={150}
+                width={100}
                 height={40}
               />
               <img
                 className="hidden dark:block"
-                src="/images/logo/logo-dark.svg"
+                // src="/images/logo/logo-dark.svg"
+                src="/images/logo/flow.png"
                 alt="Logo"
-                width={150}
+                width={100}
                 height={40}
               />
             </>
           ) : (
             <img
-              src="/images/logo/logo-icon.svg"
+              src="/images/logo/logof.png"
               alt="Logo"
               width={32}
               height={32}
@@ -250,9 +246,7 @@ const AppSidebar: React.FC = () => {
       <div className="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">
         <nav className="mb-6">
           <div className="flex flex-col gap-4">
-            <div className="">
-              {renderMenuItems(MENU_ROUTE)}
-            </div>
+            <div className="">{renderMenuItems(MENU_ROUTE)}</div>
           </div>
         </nav>
         {/* {isExpanded || isHovered || isMobileOpen ? <SidebarWidget /> : null} */}
