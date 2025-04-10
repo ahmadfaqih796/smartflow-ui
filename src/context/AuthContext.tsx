@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }: any) => {
 
   React.useEffect(() => {
     if (Cookies.get("token")) {
+      setToken(Cookies.get("token"));
       fetchUser();
     }
   }, [token]);

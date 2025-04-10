@@ -8,6 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { MoonStar, Sun } from "lucide-react";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import * as yup from "yup";
 
 const schema = yup.object().shape({
@@ -22,6 +23,7 @@ const LoginPage = () => {
   const { theme, toggleTheme } = useTheme();
   const { showAlert } = useAlert();
   const { login } = useAuth();
+  const navigate = useNavigate()
   const [loading, setLoading] = React.useState<boolean>(false);
 
   const {
@@ -40,6 +42,7 @@ const LoginPage = () => {
         password: encryptPassword(data.password),
       });
       showAlert("Login Berhasil", "success");
+      navigate("/home");
       setLoading(false);
     } catch (error) {
       setLoading(false);
