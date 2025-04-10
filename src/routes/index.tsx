@@ -1,25 +1,13 @@
-import { Suspense } from "react";
-import {
-  Navigate,
-  Route,
-  BrowserRouter as Router,
-  Routes,
-} from "react-router-dom";
-import AuthGuard from "./AuthGuard";
-import { routeConfig } from "./routerConfig";
-import AdminLayout from "@/templates/AdminLayout";
 import LoginPage from "@/pages/auth/login";
+import { JSX, Suspense } from "react";
+import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router";
+import { MENU_ROUTE } from "./menuRoute";
+import AdminLayout from "@/templates/AdminLayout";
 
-const pages = import.meta.glob("/src/pages/**/*.tsx", { eager: true }) as {
-  [key: string]: any;
-};
-const generateRoutePath = (filePath: string) => {
-  let routePath = filePath.replace("/src/pages", "").replace(".tsx", "");
-  routePath = routePath.replace(/\[([^\]]+)\]/g, ":$1");
-  if (routePath.endsWith("/index")) {
-    routePath = routePath.replace("/index", "");
-  }
-  return routePath;
+type RouteProps = {
+  path: string;
+  element: React.LazyExoticComponent<() => JSX.Element>;
+  layout?: "blank" | "default";
 };
 
 const AppRoutes = () => {
@@ -37,31 +25,21 @@ const AppRoutes = () => {
             element={!user ? <div>login</div> : <Navigate to="/dashboard" />}
           />
 
-          {Object.keys(pages).map((filePath: string) => {
-            const Component = pages[filePath].default;
-            const routePath = generateRoutePath(filePath)?.toLowerCase();
-
-            const { allowedRoles } = routeConfig(routePath);
-
-            if (allowedRoles) {
+          {MENU_ROUTE.map(
+            ({ path, element: Component, layout }: RouteProps) => {
+              let WrappedComponent = (
+                <AdminLayout>
+                  <Component />
+                </AdminLayout>
+              );
+              if (layout === "blank") {
+                WrappedComponent = <Component />;
+              }
               return (
-                <Route
-                  key={routePath}
-                  path={routePath}
-                  element={
-                    <AuthGuard allowedRoles={allowedRoles}>
-                      <AdminLayout />
-                    </AuthGuard>
-                  }
-                >
-                  <Route index element={<Component />} />
-                </Route>
+                <Route key={path} path={path} element={WrappedComponent} />
               );
             }
-            return (
-              <Route key={routePath} path={routePath} element={<Component />} />
-            );
-          })}
+          )}
 
           {/* Error Pages */}
           <Route path="/403" element={<div>Forbidden</div>} />
