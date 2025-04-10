@@ -13,3 +13,5 @@ export const COLOR = {
    secondary: "#fafae6",
    danger: "#fae1e1"
  }
+
+ export const ANIMATION = 'transition duration-1000 ease-in-out'

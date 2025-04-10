@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router";
 import { ChevronDownIcon } from "@/assets/icons";
 import { useSidebar } from "@/context/SidebarContext";
 import { MENU_ROUTE } from "@/routes/menuRoute";
+import { ANIMATION } from "@/constants/theme";
 
 type NavItem = {
   name: string;
@@ -195,7 +196,7 @@ const AppSidebar: React.FC = () => {
 
   return (
     <aside
-      className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200 
+      className={`${ANIMATION} fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200 
         ${
           isExpanded || isMobileOpen
             ? "w-[290px]"

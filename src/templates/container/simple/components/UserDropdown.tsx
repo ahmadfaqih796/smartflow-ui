@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Link } from "react-router";
 
 export default function UserDropdown() {
+   
   const { user, token, logout } = useAuth();
   const data = user as any;
 

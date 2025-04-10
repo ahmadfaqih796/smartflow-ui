@@ -3,6 +3,7 @@ import { Outlet } from "react-router";
 import AppHeader from "./container/simple/AppHeader";
 import Backdrop from "./container/simple/Backdrop";
 import AppSidebar from "./container/simple/AppSidebar";
+import Fab from "@/components/button/Fab";
 
 const LayoutContent: React.FC = () => {
   const { isExpanded, isHovered, isMobileOpen } = useSidebar();
@@ -21,6 +22,7 @@ const LayoutContent: React.FC = () => {
         <AppHeader />
         <div className="p-4 mx-auto max-w-(--breakpoint-2xl) md:p-6">
           <Outlet />
+          <Fab />
         </div>
       </div>
     </div>
