@@ -36,7 +36,7 @@ export default function UserDropdown() {
       >
         <span className="mr-3 overflow-hidden rounded-full h-11 w-11">
           {/* <img src="/images/user/owner.jpg" alt="User" /> */}
-          <img src={getAvatar(data?.avatar)} alt="User" />
+          <img src={getAvatar(data?.avatar)} className="object-cover w-full h-full" alt="User" />
         </span>
 
         <span className="block mr-1 font-medium text-theme-sm">

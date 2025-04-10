@@ -1,7 +1,11 @@
+import Breadcrumb from "@/components/breadcrumb/Breadcrumb"
 
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <div>
+      <Breadcrumb pageTitle="Dashboard" />
+      <p>Dashboard</p>
+    </div>
   )
 }
 

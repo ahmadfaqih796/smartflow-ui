@@ -1,9 +1,10 @@
 /* https://tailwindcss.com/docs/theme */
 @theme static {
    /* colors */
-   --color-layout: var(--color-green-50);
-   --color-dark-layout: var(--color-green-950);
-   --color-primary: #85d5d0;
+   --color-layout: var(--color-slate-50);
+   --color-dark-layout: var(--color-slate-950);
+   /* --color-primary: #85d5d0; */
+   --color-primary: #f0f5ff;
    --color-dark-primary: var(--color-red-500);
    --color-secondary: var(--color-blue-500);
 
