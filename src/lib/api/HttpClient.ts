@@ -37,7 +37,14 @@ class HttpClient {
     );
     
     this.instance.interceptors.response.use(
-      (response) => response,
+      (response) => {
+        console.log("xxxxx", response)
+        if ((response.data as any).message === "Invalid Token") {
+          Cookies.remove("token");
+          window.location.href = `/`;
+        }
+        return response;
+      },
       (error: AxiosError<Result>) => {
         if (error.response?.status === 401) {
           window.location.href = `/auth/login?sessionExpired=true`;

@@ -79,16 +79,18 @@ const UserPage: React.FC = () => {
           <Modal
             title="Open Modal 1"
             open={isOpen.create}
+            
             onClose={() => setIsOpen({ ...isOpen, create: false })}
           >
             <button
               onClick={() => setIsOpen({ ...isOpen, update: true })}
               className="btn btn-primary"
             >
-              Open Modal 2
+              Open
             </button>
             <Modal
               title="Open Modal 2"
+              fullwidth
               open={isOpen.update}
               onClose={() => setIsOpen({ ...isOpen, update: false })}
             >

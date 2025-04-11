@@ -1,3 +1,4 @@
+import { ANIMATION } from "@/constants/theme";
 import { ModalManager } from "@/utils/modalManager";
 import React from "react";
 
@@ -16,25 +17,25 @@ const Modal: React.FC<UserModalProps> = ({
   children,
   fullwidth = false,
 }) => {
-
   React.useEffect(() => {
-    if (open) {
-      ModalManager.increment();
-    }
+    if (open) ModalManager.increment();
     return () => {
-      if (open) {
-        ModalManager.decrement();
-      }
+      if (open) ModalManager.decrement();
     };
   }, [open]);
-  if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-9999 p-4 flex items-center justify-center bg-black/30 backdrop-blur-sm">
+    <div
+      className={`
+        fixed inset-0 z-9999 p-4 flex items-center justify-center bg-black/30 backdrop-blur-sm
+        ${ANIMATION}
+        ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
+      `}
+    >
       <div
-        className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg ${
-          fullwidth ? "w-full" : "w-full max-w-md"
-        }`}
+        className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg ${ANIMATION} ${
+          open ? "opacity-100 scale-100" : "opacity-0 scale-95"
+        } ${fullwidth ? "w-full" : "w-full max-w-md"}`}
       >
         <div className="relative flex items-center justify-between m-4">
           <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
@@ -45,10 +46,7 @@ const Modal: React.FC<UserModalProps> = ({
           </button>
         </div>
         <hr />
-        <div className="m-4 overflow-y-auto h-[70vh]">
-          
-          {children}
-        </div>
+        <div className="m-4 overflow-y-auto h-[70vh]">{children}</div>
       </div>
     </div>
   );
