@@ -14,4 +14,4 @@ export const COLOR = {
    danger: "#fae1e1"
  }
 
- export const ANIMATION = 'transition duration-1000 ease-in-out'
+ export const ANIMATION = 'transition-all duration-1000 ease-in-out'
