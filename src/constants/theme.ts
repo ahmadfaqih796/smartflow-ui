@@ -15,3 +15,5 @@ export const COLOR = {
  }
 
  export const ANIMATION = 'transition-all duration-1000 ease-in-out'
+
+ export const TEXT_ELLIPSIS = 'overflow-hidden text-ellipsis text-overflow-ellipsis whitespace-nowrap w-[200px] min-w-[200px]'

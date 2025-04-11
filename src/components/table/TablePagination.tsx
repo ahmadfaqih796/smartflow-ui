@@ -26,24 +26,25 @@ const TablePagination = <T,>({
   const end = Math.min((page + 1) * pageSize, total);
 
   return (
-    <div className="w-full overflow-x-auto">
-      <table className="min-w-full text-sm text-left border rounded-lg">
-        <thead className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-white">
-          <tr>
-            {columns.map((col, idx) => (
-              <th key={idx} className="px-4 py-3 font-semibold border-b">
-                {col}
-              </th>
+    <div>
+      <div className="w-full overflow-x-auto">
+        <table className="min-w-full text-sm text-left border rounded-lg">
+          <thead className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-white">
+            <tr>
+              {columns.map((col, idx) => (
+                <th key={idx} className="px-4 py-3 font-semibold border-b">
+                  {col}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="text-gray-800 dark:text-white divide-y">
+            {data.map((item, idx) => (
+              <tr key={idx}>{renderRow(item, idx)}</tr>
             ))}
-          </tr>
-        </thead>
-        <tbody className="text-gray-800 dark:text-white divide-y">
-          {data.map((item, idx) => (
-            <tr key={idx}>{renderRow(item, idx)}</tr>
-          ))}
-        </tbody>
-      </table>
-
+          </tbody>
+        </table>
+      </div>
       <div className="flex flex-col sm:flex-row justify-between items-center mt-4 gap-2">
         <div className="text-sm text-gray-600 dark:text-gray-400">
           Showing {start} - {end} of {total}
