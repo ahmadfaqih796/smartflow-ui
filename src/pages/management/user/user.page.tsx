@@ -1,7 +1,7 @@
 import Breadcrumb from "@/components/breadcrumb/Breadcrumb";
 import Card from "@/components/card/Card";
+import Modal from "@/components/modal/Modal";
 import TablePagination from "@/components/table/TablePagination";
-import { TEXT_ELLIPSIS } from "@/constants/theme";
 import UserService from "@/lib/services/UserService";
 import React from "react";
 
@@ -19,6 +19,11 @@ const UserPage: React.FC = () => {
   const [page, setPage] = React.useState(0);
   const [pageSize, setPageSize] = React.useState(10);
   const [data, setData] = React.useState<any>({ data: [], total_data: 0 });
+  const [isOpen, setIsOpen] = React.useState({
+    create: false,
+    update: false,
+    delete: false,
+  });
   const [isPending, startTransition] = React.useTransition();
 
   const fetchUsers = () => {
@@ -37,6 +42,12 @@ const UserPage: React.FC = () => {
       <Breadcrumb pageTitle="User" path="management/user" />
       <div className="space-y-6">
         <Card title="Basic Table 1">
+          <button
+            onClick={() => setIsOpen({ ...isOpen, create: true })}
+            className="btn btn-primary"
+          >
+            Add User
+          </button>
           {isPending ? (
             <p>Loading...</p>
           ) : (
@@ -65,6 +76,25 @@ const UserPage: React.FC = () => {
               )}
             />
           )}
+          <Modal
+            title="Open Modal 1"
+            open={isOpen.create}
+            onClose={() => setIsOpen({ ...isOpen, create: false })}
+          >
+            <button
+              onClick={() => setIsOpen({ ...isOpen, update: true })}
+              className="btn btn-primary"
+            >
+              Open Modal 2
+            </button>
+            <Modal
+              title="Open Modal 2"
+              open={isOpen.update}
+              onClose={() => setIsOpen({ ...isOpen, update: false })}
+            >
+              ssasasas
+            </Modal>
+          </Modal>
         </Card>
       </div>
     </div>

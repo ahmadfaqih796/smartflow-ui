@@ -28,7 +28,7 @@ export const MENU_ROUTE = [
         name: "User",
         path: "/management/users",
         count: 4,
-        element: lazy(() => import("../pages/management/user")),
+        element: lazy(() => import("../pages/management/user/user.page")),
       },
       {
         name: "Role",
