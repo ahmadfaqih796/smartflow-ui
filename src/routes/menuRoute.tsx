@@ -31,9 +31,9 @@ export const MENU_ROUTE = [
         element: lazy(() => import("../pages/management/user/user.page")),
       },
       {
-        name: "Role",
-        path: "/management/roles",
-        element: lazy(() => import("../pages/management/role")),
+        name: "Roles Workflow",
+        path: "/management/roles-workflow",
+        element: lazy(() => import("../pages/management/role/roles-workflow.page")),
       },
     ],
   },

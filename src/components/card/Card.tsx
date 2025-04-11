@@ -1,7 +1,7 @@
 import { ANIMATION } from "@/constants/theme";
 
 type ComponentCardProps = {
-   title: string;
+   title?: string;
    children: React.ReactNode;
    className?: string;
    desc?: string;
