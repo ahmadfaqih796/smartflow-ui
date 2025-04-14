@@ -1,38 +1,41 @@
 import Card from "@/components/card/Card";
+import ActionModal from "@/components/modal/ActionModal";
 import TablePagination from "@/components/table/TablePagination";
-import RolesWorkflowService from "@/lib/services/RolesWorkflowService";
+import BaseService from "@/lib/services/BaseService";
 import React from "react";
 import RolesWorkflowForm from "./components/roles-workflow.form";
+import { Button } from "@/components/button/Button";
 
-const service = new RolesWorkflowService();
+const service = new BaseService();
 
-export async function getData(page = 0, limit = 5) {
-  const res = await service.getRolesWorkflow({
+const getData = async (page = 0, limit = 5) => {
+  const res = await service.get("/department", {
     params: { pageNumber: page + 1, limit: limit },
   });
   if (!res.data) throw new Error("Failed to fetch roles workflow");
   return res.data;
-}
+};
 
 const RolesWorkflowPage: React.FC = () => {
+  const [selectedData, setSelectedData] = React.useState<any>(null);
   const [page, setPage] = React.useState(0);
   const [pageSize, setPageSize] = React.useState(5);
-  const [data, setData] = React.useState<any>({ data: [], total_data: 0 });
+  const [list, setList] = React.useState<any>({ data: [], total_data: 0 });
   const [isOpen, setIsOpen] = React.useState({
     form: false,
     delete: false,
   });
   const [isPending, startTransition] = React.useTransition();
 
-  const fetchUsers = () => {
+  const fetchData = () => {
     startTransition(async () => {
       const result = await getData(page, pageSize);
-      setData(result);
+      setList(result);
     });
   };
 
   React.useEffect(() => {
-    fetchUsers();
+    fetchData();
   }, [page, pageSize]);
 
   return (
@@ -40,12 +43,15 @@ const RolesWorkflowPage: React.FC = () => {
       <div className="space-y-6">
         <Card>
           <div className="flex justify-end gap-2 m-4">
-            <button
-              onClick={() => setIsOpen({ ...isOpen, form: true })}
-              className="btn btn-primary"
+            <Button
+              onClick={() => {
+                setSelectedData(null);
+                setIsOpen({ ...isOpen, form: true });
+              }}
+              variant="info"
             >
-              Add User
-            </button>
+              Tambah
+            </Button>
           </div>
           <hr />
           <div className="m-4">
@@ -59,11 +65,12 @@ const RolesWorkflowPage: React.FC = () => {
                   "Total Workflow",
                   "Created Date",
                   "Created By",
+                  "Action",
                 ]}
-                data={data.data}
+                data={list.data}
                 page={page}
                 pageSize={pageSize}
-                total={data.total_data}
+                total={list.total_data}
                 onPageChange={setPage}
                 onPageSizeChange={(size) => {
                   setPageSize(size);
@@ -82,6 +89,26 @@ const RolesWorkflowPage: React.FC = () => {
                     </td>
                     <td className="px-4 py-2">{user.created_date}</td>
                     <td className="px-4 py-2">{user.created_by}</td>
+                    <td className="px-4 py-2 flex gap-2">
+                      <Button
+                        onClick={() => {
+                          setSelectedData(user);
+                          setIsOpen({ ...isOpen, form: true });
+                        }}
+                        variant="warning"
+                      >
+                        Edit
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          setSelectedData(user);
+                          setIsOpen({ ...isOpen, delete: true });
+                        }}
+                        variant="danger"
+                      >
+                        Delete
+                      </Button>
+                    </td>
                   </>
                 )}
               />
@@ -90,6 +117,25 @@ const RolesWorkflowPage: React.FC = () => {
           <RolesWorkflowForm
             open={isOpen.form}
             togleModal={() => setIsOpen({ ...isOpen, form: false })}
+            data={selectedData}
+            refetch={fetchData}
+          />
+          <ActionModal
+            open={isOpen.delete}
+            togleModal={() => setIsOpen({ ...isOpen, delete: false })}
+            title="Delete Roles Workflow"
+            desc="Are you sure you want to delete this roles workflow?"
+            onSubmit={async () => {
+              const id = selectedData.id;
+              try {
+                await service.delete("/department", id);
+              } catch (error) {
+                alert("Delete failed, restoring data!");
+              } finally {
+                fetchData();
+                setIsOpen({ ...isOpen, delete: false });
+              }
+            }}
           />
         </Card>
       </div>

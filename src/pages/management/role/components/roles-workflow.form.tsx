@@ -2,6 +2,7 @@ import { Button } from "@/components/button/Button";
 import { InputField } from "@/components/forms/InputField";
 import Modal from "@/components/modal/Modal";
 import { SCROLLBAR } from "@/constants/theme";
+import BaseService from "@/lib/services/BaseService";
 import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -11,29 +12,53 @@ type Props = {
   open: boolean;
   togleModal: () => void;
   data?: any;
+  refetch?: () => void;
 };
+
+const service = new BaseService();
 
 const schema = yup.object().shape({
   position: yup.string().required("Position wajib diisi"),
 });
 
-const RolesWorkflowForm: React.FC<Props> = ({ open, togleModal, data }) => {
+const RolesWorkflowForm: React.FC<Props> = ({ open, togleModal, data, refetch }) => {
+  console.log("xxxxx", data);
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
+  React.useEffect(() => {
+    if (data) {
+      reset({
+        position: data.position,
+      });
+    } else {
+      reset({
+        position: "",
+      });
+    }
+  }, [data, reset]);
+
   const onSubmit = async (values: any) => {
     try {
-      const payload = {
-        ...values,
-      };
-      console.log("rrrr", payload);
+      if (data) {
+        await service.post("/department", {
+          id : data.id,
+          ...values
+        });
+      } else {
+        await service.post("/department", values);
+      }
+      togleModal();
     } catch (error) {
       console.log("xxxxxx", error);
+    } finally {
+      refetch && refetch();
     }
   };
 
