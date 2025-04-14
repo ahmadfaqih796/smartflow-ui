@@ -77,9 +77,9 @@ const UserPage: React.FC = () => {
             />
           )}
           <Modal
+            fullwidth
             title="Open Modal 1"
             open={isOpen.create}
-            
             onClose={() => setIsOpen({ ...isOpen, create: false })}
           >
             <button
@@ -90,7 +90,6 @@ const UserPage: React.FC = () => {
             </button>
             <Modal
               title="Open Modal 2"
-              fullwidth
               open={isOpen.update}
               onClose={() => setIsOpen({ ...isOpen, update: false })}
             >
