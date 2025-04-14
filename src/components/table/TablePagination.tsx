@@ -1,3 +1,4 @@
+import { ANIMATION } from "@/constants/theme";
 import React from "react";
 
 type Props<T> = {
@@ -27,12 +28,12 @@ const TablePagination = <T,>({
 
   return (
     <div>
-      <div className="w-full overflow-x-auto">
-        <table className="min-w-full text-sm text-left border rounded-lg">
-          <thead className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-white">
-            <tr>
+      <div className="w-full overflow-x-auto rounded-lg border">
+        <table className="min-w-full text-sm text-left rounded-lg">
+          <thead className={`${ANIMATION} bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-white`}>
+            <tr className="border-b">
               {columns.map((col, idx) => (
-                <th key={idx} className="px-4 py-3 font-semibold border-b">
+                <th key={idx} className="px-4 py-3 font-semibold">
                   {col}
                 </th>
               ))}

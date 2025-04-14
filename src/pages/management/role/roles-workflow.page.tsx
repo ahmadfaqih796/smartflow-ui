@@ -6,6 +6,7 @@ import { useAlert } from "@/context/AlertContext";
 import BaseService from "@/lib/services/BaseService";
 import React from "react";
 import RolesWorkflowForm from "./components/roles-workflow.form";
+import SearchForm from "@/components/forms/SearchForm";
 
 const service = new BaseService();
 
@@ -44,7 +45,8 @@ const RolesWorkflowPage: React.FC = () => {
     <div>
       <div className="space-y-6">
         <Card>
-          <div className="flex justify-end gap-2 m-4">
+          <div className="flex justify-between gap-2 m-4">
+            <SearchForm />
             <Button
               onClick={() => {
                 setSelectedData(null);
