@@ -5,6 +5,7 @@ import BaseService from "@/lib/services/BaseService";
 import React from "react";
 import RolesWorkflowForm from "./components/roles-workflow.form";
 import { Button } from "@/components/button/Button";
+import { useAlert } from "@/context/AlertContext";
 
 const service = new BaseService();
 
@@ -17,6 +18,7 @@ const getData = async (page = 0, limit = 5) => {
 };
 
 const RolesWorkflowPage: React.FC = () => {
+  const { showAlert } = useAlert();
   const [selectedData, setSelectedData] = React.useState<any>(null);
   const [page, setPage] = React.useState(0);
   const [pageSize, setPageSize] = React.useState(5);
@@ -124,13 +126,14 @@ const RolesWorkflowPage: React.FC = () => {
             open={isOpen.delete}
             togleModal={() => setIsOpen({ ...isOpen, delete: false })}
             title="Delete Roles Workflow"
-            desc="Are you sure you want to delete this roles workflow?"
+            desc="Are you sure you want to delete this roles workflow ?"
             onSubmit={async () => {
               const id = selectedData.id;
               try {
                 await service.delete("/department", id);
+                showAlert("Berhasil menghapus data", "success");
               } catch (error) {
-                alert("Delete failed, restoring data!");
+                showAlert("Gagal menghapus data", "error");
               } finally {
                 fetchData();
                 setIsOpen({ ...isOpen, delete: false });

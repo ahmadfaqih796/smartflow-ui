@@ -2,6 +2,7 @@ import { Button } from "@/components/button/Button";
 import { InputField } from "@/components/forms/InputField";
 import Modal from "@/components/modal/Modal";
 import { SCROLLBAR } from "@/constants/theme";
+import { useAlert } from "@/context/AlertContext";
 import BaseService from "@/lib/services/BaseService";
 import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
@@ -23,6 +24,7 @@ const schema = yup.object().shape({
 
 const RolesWorkflowForm: React.FC<Props> = ({ open, togleModal, data, refetch }) => {
   console.log("xxxxx", data);
+  const {showAlert} = useAlert();
   const {
     register,
     handleSubmit,
@@ -51,11 +53,15 @@ const RolesWorkflowForm: React.FC<Props> = ({ open, togleModal, data, refetch })
           id : data.id,
           ...values
         });
+        showAlert("Berhasil mengubah data", "success");
       } else {
         await service.post("/department", values);
+        showAlert("Berhasil menambahkan data", "success");
       }
+      
       togleModal();
     } catch (error) {
+      showAlert("Gagal mengubah data", "error");
       console.log("xxxxxx", error);
     } finally {
       refetch && refetch();
