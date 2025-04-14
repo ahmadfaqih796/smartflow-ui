@@ -17,3 +17,5 @@ export const COLOR = {
  export const ANIMATION = 'transition-all duration-1000 ease-in-out'
 
  export const TEXT_ELLIPSIS = 'overflow-hidden text-ellipsis text-overflow-ellipsis whitespace-nowrap w-[200px] min-w-[200px]'
+
+ export const SCROLLBAR = '[&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500'
