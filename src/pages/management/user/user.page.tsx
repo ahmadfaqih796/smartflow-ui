@@ -41,7 +41,7 @@ const UserPage: React.FC = () => {
     <div>
       <Breadcrumb pageTitle="User" path="management/user" />
       <div className="space-y-6">
-        <Card title="Basic Table 1">
+        <Card>
           <button
             onClick={() => setIsOpen({ ...isOpen, create: true })}
             className="btn btn-primary"

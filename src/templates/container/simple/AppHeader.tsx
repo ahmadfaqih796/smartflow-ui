@@ -4,6 +4,7 @@ import { useSidebar } from "@/context/SidebarContext";
 import { Link, useLocation } from "react-router";
 import UserDropdown from "./components/UserDropdown";
 import { ANIMATION } from "@/constants/theme";
+import { capitalizeFirstLetter } from "@/utils/fontCase";
 // import { ThemeToggleButton } from "@/components/common/ThemeToggleButton";
 // import NotificationDropdown from "@/components/header/NotificationDropdown";
 // import UserDropdown from "@/components/header/UserDropdown";
@@ -124,8 +125,7 @@ const AppHeader: React.FC = () => {
           </button>
 
           <div className="hidden lg:block">
-            <h1 className="text-2xl font-bold text-gray-700">{location.pathname.split("/").filter(Boolean).pop()}</h1>
-
+            <h1 className="text-2xl font-bold text-gray-700">{capitalizeFirstLetter(location.pathname.split("/").filter(Boolean).pop() || "Dashboard")}</h1>
           </div>
         </div>
         <div
