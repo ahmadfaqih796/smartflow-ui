@@ -7,19 +7,31 @@ class BaseService {
     this.api = new HttpClient();
   }
 
-  get(url: string ,config?: AxiosRequestConfig) {
-    const response = this.api.get<any>(url, config );
-    return response;
+  get(url: string, config?: AxiosRequestConfig) {
+    try {
+      const response = this.api.get<any>(url, config);
+      return response;
+    } catch (error) {
+      throw error;
+    }
   }
 
   post(url: string, data: any) {
-    const response = this.api.post<any>(url, data);
-    return response;
+    try {
+      const response = this.api.post<any>(url, data);
+      return response;
+    } catch (error) {
+      throw error;
+    }
   }
 
   delete(url: string, id: any) {
-   const response = this.api.delete<any>(`${url}/${id}`);
-   return response;
- }
+    try {
+      const response = this.api.delete<any>(`${url}/${id}`);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 export default BaseService;

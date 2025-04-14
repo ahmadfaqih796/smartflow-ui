@@ -1,11 +1,11 @@
+import { Button } from "@/components/button/Button";
 import Card from "@/components/card/Card";
 import ActionModal from "@/components/modal/ActionModal";
 import TablePagination from "@/components/table/TablePagination";
+import { useAlert } from "@/context/AlertContext";
 import BaseService from "@/lib/services/BaseService";
 import React from "react";
 import RolesWorkflowForm from "./components/roles-workflow.form";
-import { Button } from "@/components/button/Button";
-import { useAlert } from "@/context/AlertContext";
 
 const service = new BaseService();
 
@@ -130,10 +130,16 @@ const RolesWorkflowPage: React.FC = () => {
             onSubmit={async () => {
               const id = selectedData.id;
               try {
-                await service.delete("/department", id);
+                const res = await service.delete("/department", id);
+                console.log("xxxxxxxx", res);
                 showAlert("Berhasil menghapus data", "success");
               } catch (error) {
-                showAlert("Gagal menghapus data", "error");
+                console.log("errrrr", error);
+                showAlert(
+                  (error as any)?.response?.data?.message ||
+                    "Gagal menghapus data",
+                  "error"
+                );
               } finally {
                 fetchData();
                 setIsOpen({ ...isOpen, delete: false });
