@@ -22,9 +22,13 @@ const schema = yup.object().shape({
   position: yup.string().required("Position wajib diisi"),
 });
 
-const RolesWorkflowForm: React.FC<Props> = ({ open, togleModal, data, refetch }) => {
-  console.log("xxxxx", data);
-  const {showAlert} = useAlert();
+const RolesWorkflowForm: React.FC<Props> = ({
+  open,
+  togleModal,
+  data,
+  refetch,
+}) => {
+  const { showAlert } = useAlert();
   const {
     register,
     handleSubmit,
@@ -50,19 +54,21 @@ const RolesWorkflowForm: React.FC<Props> = ({ open, togleModal, data, refetch })
     try {
       if (data) {
         await service.post("/department", {
-          id : data.id,
-          ...values
+          id: data.id,
+          ...values,
         });
         showAlert("Berhasil mengubah data", "success");
       } else {
         await service.post("/department", values);
         showAlert("Berhasil menambahkan data", "success");
       }
-      
+
       togleModal();
     } catch (error) {
-      showAlert("Gagal mengubah data", "error");
-      console.log("xxxxxx", error);
+      showAlert(
+        (error as any).response?.data?.message || "Gagal mengubah data",
+        "error"
+      );
     } finally {
       refetch && refetch();
     }

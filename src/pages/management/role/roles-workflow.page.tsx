@@ -130,11 +130,9 @@ const RolesWorkflowPage: React.FC = () => {
             onSubmit={async () => {
               const id = selectedData.id;
               try {
-                const res = await service.delete("/department", id);
-                console.log("xxxxxxxx", res);
+                await service.delete("/department", id);
                 showAlert("Berhasil menghapus data", "success");
               } catch (error) {
-                console.log("errrrr", error);
                 showAlert(
                   (error as any)?.response?.data?.message ||
                     "Gagal menghapus data",
