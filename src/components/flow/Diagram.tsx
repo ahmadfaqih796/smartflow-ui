@@ -3,8 +3,6 @@ import ReactFlow, {
   addEdge,
   applyEdgeChanges,
   applyNodeChanges,
-  Background,
-  BackgroundVariant,
   Connection,
   Controls,
   Edge,
@@ -12,7 +10,7 @@ import ReactFlow, {
   MiniMap,
   Node,
   ReactFlowProvider,
-  useReactFlow,
+  useReactFlow
 } from "reactflow";
 import "reactflow/dist/style.css";
 import Panel from "./containers/Panel";
@@ -106,18 +104,18 @@ const FlowDiagram :React.FC<FlowProps> = ({data}) => {
             type: 'smoothstep',
             animated: true,
             style: {
-              // stroke: '#4f46e5',
-              strokeWidth: 4,
+              // stroke: 'blue',
+              strokeWidth: 5,
             },
             markerEnd: {
               type: MarkerType.ArrowClosed,
-              width: 15,
-              height: 15,
+              width: 10,
+              height: 10,
               // color: '#4f46e5',
             },
           }}
         >
-          <Background gap={16} variant={BackgroundVariant.Lines}/>
+          {/* <Background gap={20} variant={BackgroundVariant.Cross}/> */}
           <Controls />
           <MiniMap nodeStrokeWidth={3} />
         </ReactFlow>

@@ -8,6 +8,11 @@ const EndNode = ({ data }: NodeProps) => {
       <Handle
         type="target"
         position={Position.Top}
+        style={{
+          bottom: "-8px",
+          width: "10px",
+          height: "10px",
+        }}
         isValidConnection={({ source })  : any => source?.startsWith("rectangle")}
       />
     </div>

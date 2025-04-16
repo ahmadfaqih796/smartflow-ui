@@ -49,6 +49,9 @@ class HttpClient {
         if (error.response?.status === 401) {
           window.location.href = `/auth/login?sessionExpired=true`;
         }
+        if ((error.response as any).data.message === "Internal Server Error") {
+          window.location.href = `/500`;
+        }
         return Promise.reject(error);
       }
     );

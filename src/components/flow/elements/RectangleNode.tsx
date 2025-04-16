@@ -8,6 +8,11 @@ const RectangleNode = ({ data }: NodeProps) => {
       <Handle
         type="target"
         position={Position.Top}
+        style={{
+          bottom: "-8px",
+          width: "10px",
+          height: "10px",
+        }}
         // isValidConnection={({ source }): any =>
         //   source?.startsWith("start") || source?.startsWith("rectangle")
         // }
@@ -15,6 +20,11 @@ const RectangleNode = ({ data }: NodeProps) => {
       <Handle
         type="source"
         position={Position.Bottom}
+        style={{
+          bottom: "-8px",
+          width: "10px",
+          height: "10px",
+        }}
         // isValidConnection={({ target }): any =>
         //   target?.startsWith("rectangle") || target?.startsWith("end")
         // }
