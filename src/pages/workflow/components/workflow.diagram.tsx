@@ -1,5 +1,6 @@
+import FlowDiagram from "@/components/flow/Diagram";
 import Modal from "@/components/modal/Modal";
-import { SCROLLBAR } from "@/constants/theme";
+import { ANIMATION, SCROLLBAR } from "@/constants/theme";
 import React from "react";
 
 type Props = {
@@ -15,12 +16,23 @@ const WorkflowDiagram: React.FC<Props> = ({
   data,
   refetch,
 }) => {
-  console.log("xsxsxsxsxc", data);
   return (
     <div>
-      <Modal title="Diagram Workflow" open={open} onClose={togleModal} fullwidth>
-        <div className={`overflow-y-auto max-h-[70vh] ${SCROLLBAR}`}>
-          {JSON.stringify(data)}
+      <Modal
+        title="Diagram Workflow"
+        open={open}
+        onClose={togleModal}
+        fullwidth
+      >
+        <div
+          className={`overflow-y-auto max-h-[69.5vh] rounded-xl shadow-lg 
+        ${SCROLLBAR}
+        ${ANIMATION}
+        ${open ? "w-full" : "w-[0px]"}
+        `}
+        >
+          {/* {JSON.stringify(data)} */}
+          <FlowDiagram />
         </div>
       </Modal>
     </div>
