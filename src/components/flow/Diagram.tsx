@@ -4,10 +4,12 @@ import ReactFlow, {
   applyEdgeChanges,
   applyNodeChanges,
   Background,
+  BackgroundVariant,
   Connection,
   Controls,
   Edge,
   MarkerType,
+  MiniMap,
   Node,
   ReactFlowProvider,
   useReactFlow,
@@ -105,7 +107,7 @@ const FlowDiagram :React.FC<FlowProps> = ({data}) => {
             animated: true,
             style: {
               // stroke: '#4f46e5',
-              strokeWidth: 1,
+              strokeWidth: 4,
             },
             markerEnd: {
               type: MarkerType.ArrowClosed,
@@ -115,8 +117,9 @@ const FlowDiagram :React.FC<FlowProps> = ({data}) => {
             },
           }}
         >
-          <Background gap={16} />
+          <Background gap={16} variant={BackgroundVariant.Lines}/>
           <Controls />
+          <MiniMap nodeStrokeWidth={3} />
         </ReactFlow>
       </div>
     </div>

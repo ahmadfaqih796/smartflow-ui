@@ -14,7 +14,6 @@ const WorkflowDiagram: React.FC<Props> = ({
   open,
   togleModal,
   data,
-  refetch,
 }) => {
   return (
     <div>
@@ -25,7 +24,7 @@ const WorkflowDiagram: React.FC<Props> = ({
         fullwidth
       >
         <div
-          className={`overflow-y-auto max-h-[69.5vh] rounded-xl shadow-lg 
+          className={`overflow-y-hidden max-h-[66.7vh] rounded-xl shadow-lg 
         ${SCROLLBAR}
         ${ANIMATION}
         ${open ? "w-full" : "w-[0px]"}
