@@ -32,7 +32,7 @@ const WorkflowDiagram: React.FC<Props> = ({
         `}
         >
           {/* {JSON.stringify(data)} */}
-          <FlowDiagram />
+          <FlowDiagram data={data} />
         </div>
       </Modal>
     </div>

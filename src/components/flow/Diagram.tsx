@@ -7,26 +7,29 @@ import ReactFlow, {
   Connection,
   Controls,
   Edge,
+  MarkerType,
   Node,
   ReactFlowProvider,
   useReactFlow,
 } from "reactflow";
 import "reactflow/dist/style.css";
 import Panel from "./containers/Panel";
-import { DiamondNode, StartNode } from "./elements";
+import { DiamondNode, EndNode, RectangleNode, StartNode } from "./elements";
 
-// Import node lain juga...
+type FlowProps = {
+  data? : any
+}
 
 const nodeTypes = {
   start: StartNode,
-  // rectangle: RectangleNode,
-  // 'circle': CircleNode,
+  rectangle: RectangleNode,
   diamond: DiamondNode,
-  // 'plus': PlusNode,
-  // 'end': EndNode,
+  end: EndNode,
 };
 
-const FlowDiagram = () => {
+
+
+const FlowDiagram :React.FC<FlowProps> = ({data}) => {
   const [nodes, setNodes] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
 
@@ -69,6 +72,22 @@ const FlowDiagram = () => {
     event.dataTransfer.dropEffect = "move";
   };
 
+  React.useEffect(() => {
+    if (data?.data_json) {
+      const parsed = JSON.parse(data.data_json);
+      console.log("paredededed", parsed)
+      const mappedNodes = parsed.nodes.map((node: any) => ({
+        ...node,
+        type: node.data?.shapeId || node.type
+      }));
+      if (parsed.nodes && parsed.edges) {
+        
+        setNodes(mappedNodes);
+        setEdges(parsed.edges);
+      }
+    }
+  }, [data]);
+
   return (
     <div className="flex h-[69.5vh]">
       <Panel />
@@ -81,6 +100,20 @@ const FlowDiagram = () => {
           onConnect={onConnect}
           nodeTypes={nodeTypes}
           fitView
+          defaultEdgeOptions={{
+            type: 'smoothstep',
+            animated: true,
+            style: {
+              // stroke: '#4f46e5',
+              strokeWidth: 1,
+            },
+            markerEnd: {
+              type: MarkerType.ArrowClosed,
+              width: 15,
+              height: 15,
+              // color: '#4f46e5',
+            },
+          }}
         >
           <Background gap={16} />
           <Controls />
@@ -90,9 +123,9 @@ const FlowDiagram = () => {
   );
 };
 
-const DiagramWrapper = () => (
+const DiagramWrapper : React.FC<FlowProps> = ({data}) => (
   <ReactFlowProvider>
-    <FlowDiagram />
+    <FlowDiagram data={data}  />
   </ReactFlowProvider>
 );
 

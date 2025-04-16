@@ -1,10 +1,17 @@
-import { Handle, NodeProps, Position } from 'reactflow';
+import { Handle, NodeProps, Position } from "reactflow";
+import { COLOR_SHAPE_FLOW_DIAGRAM } from "../constants/digram.constant";
 
 const StartNode = ({ data }: NodeProps) => {
   return (
-    <div className='w-[100px] h-[30px] bg-green-500 text-white flex items-center justify-center cursor-move rounded-4xl border-2 border-green-700'>
-      <div className='text-sm'>{data.label}</div>
-      <Handle type="target" position={Position.Bottom} />
+    <div className={`w-[90px] h-[30px] ${COLOR_SHAPE_FLOW_DIAGRAM.start}`}>
+      <div className="text-sm">{data.label}</div>
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        //   isValidConnection={({ target }) : any => {
+        //     return target?.startsWith('rectangle');
+        //   }}
+      />
     </div>
   );
 };

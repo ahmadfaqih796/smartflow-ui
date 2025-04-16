@@ -1,4 +1,6 @@
 import DiamondNode from "./DiamondNode";
 import StartNode from "./StartNode";
+import RectangleNode from "./RectangleNode";
+import EndNode from "./EndNode";
 
-export { DiamondNode, StartNode };
+export { DiamondNode, StartNode, RectangleNode, EndNode };
