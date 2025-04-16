@@ -5,7 +5,7 @@ import {
   // ChevronDownIcon,
   GridIcon,
   // HorizontaLDots,
-  // ListIcon,
+  ListIcon,
   // PageIcon,
   // PieChartIcon,
   // PlugInIcon,
@@ -36,5 +36,11 @@ export const MENU_ROUTE = [
         element: lazy(() => import("../pages/management/role/roles-workflow.page")),
       },
     ],
+  },
+  {
+    path: "/workflow",
+    name: "Workflow",
+    icon: <ListIcon />,
+    element: lazy(() => import("../pages/workflow/workflow.page")),
   },
 ];

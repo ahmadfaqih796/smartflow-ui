@@ -26,7 +26,7 @@ const TablePagination = <T,>({
   const start = page * pageSize + 1;
   const end = Math.min((page + 1) * pageSize, total);
 
-  return (
+return (
     <div>
       <div className="w-full overflow-x-auto rounded-lg border">
         <table className="min-w-full text-sm text-left rounded-lg">

@@ -4,7 +4,7 @@ import React from "react";
 
 type UserModalProps = {
   open: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   title: string;
   children: React.ReactNode;
   fullwidth?: boolean;
@@ -29,7 +29,11 @@ const Modal: React.FC<UserModalProps> = ({
       className={`
         fixed inset-0 z-9999 p-4 flex items-center justify-center bg-black/30 backdrop-blur-sm
         ${ANIMATION}
-        ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
+        ${
+          open
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+        }
       `}
     >
       <div
@@ -41,9 +45,11 @@ const Modal: React.FC<UserModalProps> = ({
           <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
             {title}
           </h2>
-          <button onClick={onClose} className="text-2xl">
-            &times;
-          </button>
+          {onClose && (
+            <button onClick={onClose} className="text-2xl">
+              &times;
+            </button>
+          )}
         </div>
         <hr />
         <div>{children}</div>
