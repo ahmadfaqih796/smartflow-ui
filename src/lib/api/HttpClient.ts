@@ -38,7 +38,6 @@ class HttpClient {
     
     this.instance.interceptors.response.use(
       (response) => {
-        console.log("xxxxx", response)
         if ((response.data as any).message === "Invalid Token") {
           Cookies.remove("token");
           window.location.href = `/`;
@@ -49,9 +48,9 @@ class HttpClient {
         if (error.response?.status === 401) {
           window.location.href = `/auth/login?sessionExpired=true`;
         }
-        if (error.code === "ERR_BAD_RESPONSE") {
-          window.location.href = `/500`;
-        }
+        // if (error.code === "ERR_BAD_RESPONSE") {
+        //   window.location.href = `/500`;
+        // }
         return Promise.reject(error);
       }
     );

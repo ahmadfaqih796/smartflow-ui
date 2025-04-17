@@ -13,9 +13,9 @@ import ReactFlow, {
   useReactFlow,
 } from "reactflow";
 import "reactflow/dist/style.css";
+import Action from "./containers/Action";
 import Panel from "./containers/Panel";
 import { DiamondNode, EndNode, RectangleNode, StartNode } from "./elements";
-import Action from "./containers/Action";
 
 type FlowProps = {
   data?: any;
@@ -32,7 +32,7 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
   const [nodes, setNodes] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
 
-  console.log("masuuuu", nodes, edges);
+  // console.log("masuuuu", JSON.parse(data?.data_json));
 
   const onNodesChange = useCallback(
     (changes: any) => setNodes((nds) => applyNodeChanges(changes, nds)),
@@ -105,7 +105,7 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
             animated: true,
             style: {
               // stroke: 'blue',
-              strokeWidth: 5,
+              strokeWidth: 2,
             },
             markerEnd: {
               type: MarkerType.ArrowClosed,
@@ -120,7 +120,13 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
           <MiniMap nodeStrokeWidth={3} />
         </ReactFlow>
       </div>
-      <Action />
+      <Action
+        data={{
+          id: data?.id,
+          nodes,
+          edges,
+        }}
+      />
     </div>
   );
 };

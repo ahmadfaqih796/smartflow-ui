@@ -25,7 +25,6 @@ export const AuthProvider = ({ children }: any) => {
     try {
       const response = await service.getMe();
       setUser((response.data as any)[0]);
-      console.log("mmmmmeee", (response.data as any)[0]);
     } catch (error) {
       console.error("Error fetching user:", error);
     }
@@ -34,7 +33,6 @@ export const AuthProvider = ({ children }: any) => {
   const login = async (credentials: any) => {
     try {
       const response = await service.login(credentials);
-      console.log("mmmamamamam", response.data.Token);
       const { Token } = response.data;
       Cookies.set("token", Token, { expires: 7 });
       setToken(Token);

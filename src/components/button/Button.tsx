@@ -1,3 +1,4 @@
+import { Loader } from "lucide-react";
 import React from "react";
 
 type ButtonProps = {
@@ -8,6 +9,7 @@ type ButtonProps = {
   color?: "success" | "danger" | "warning" | "info";
   variant?: "contained" | "rounded";
   fullwidth?: boolean;
+  loading?: boolean;
   onClick?: () => void;
 };
 
@@ -54,6 +56,7 @@ export const ButtonIcon = ({
   children,
   tooltip,
   position = "top",
+  loading = false,
   ...props
 }: ButtonIconProps) => {
   const [show, setShow] = React.useState(false);
@@ -79,12 +82,12 @@ export const ButtonIcon = ({
         onMouseEnter={() => setShow(true)}
         onMouseLeave={() => setShow(false)}
         className={`${
-          props.disabled
+          props.disabled || loading
             ? "bg-gray-400 cursor-not-allowed"
             : `${getColor(props.color)} cursor-pointer`
-        } rounded-full py-2 px-2 text-white font-bold transition duration-1000 ease-in-out`}
+        } rounded-full py-2 px-2 text-white font-bold transition duration-400 ease-in-out`}
       >
-        {children}
+        {loading ? <Loader className="animate-spin" /> : children}
       </button>
       {tooltip && show && (
         <div

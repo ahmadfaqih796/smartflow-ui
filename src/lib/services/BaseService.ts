@@ -25,6 +25,15 @@ class BaseService {
     }
   }
 
+  put(url: string, id: any, data: any) {
+    try {
+      const response = this.api.put<any>(`${url}${id ? `/${id}` : ""}`, data);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   delete(url: string, id: any) {
     try {
       const response = this.api.delete<any>(`${url}/${id}`);
