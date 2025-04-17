@@ -3,7 +3,7 @@ import React from "react";
 
 const NotFoundPage: React.FC = () => {
   return (
-    <CubeFrame>
+    <CubeFrame color="red" cube={20}>
       <div className="text-center">
         <p className="text-base font-semibold text-indigo-600 dark:text-indigo-200">404</p>
         <h1 className="mt-4 text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl">

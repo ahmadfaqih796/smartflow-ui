@@ -4,9 +4,10 @@ import React from "react";
 type Props = {
   children: React.ReactNode;
   color? : "red" | "blue";
+  cube? : Number,
 };
 
-const CubeFrame: React.FC<Props> = ({ children, color }) => {
+const CubeFrame: React.FC<Props> = ({ children, color, cube = 10 }) => {
    const getColor = (value?: string) => {
      switch (value) {
        case "red":
@@ -31,7 +32,7 @@ const CubeFrame: React.FC<Props> = ({ children, color }) => {
   return (
     <main className={`area w-full h-screen flex items-center justify-center ${getBackgroundColor(color)}`}>
       <ul className="cubes">
-        {Array.from({ length: 10 }).map((_, i) => (
+        {Array.from({ length: Number(cube) }).map((_, i) => (
           <li key={i} className={`${getColor(color)}`} />
         ))}
       </ul>
