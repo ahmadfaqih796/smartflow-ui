@@ -71,7 +71,7 @@ const WorkflowPage: React.FC = () => {
                 setSelectedData(null);
                 setIsOpen({ ...isOpen, form: true });
               }}
-              variant="info"
+              color="info"
             >
               Tambah
             </Button>
@@ -122,7 +122,7 @@ const WorkflowPage: React.FC = () => {
                         onClick={() => {
                           openDiagramModal(item);
                         }}
-                        variant="warning"
+                        color="warning"
                       >
                         Diagram
                       </Button>
@@ -131,7 +131,7 @@ const WorkflowPage: React.FC = () => {
                           setSelectedData(item);
                           setIsOpen({ ...isOpen, form: true });
                         }}
-                        variant="warning"
+                        color="warning"
                       >
                         Edit
                       </Button>
@@ -140,7 +140,7 @@ const WorkflowPage: React.FC = () => {
                           setSelectedData(item);
                           setIsOpen({ ...isOpen, delete: true });
                         }}
-                        variant="danger"
+                        color="danger"
                       >
                         Delete
                       </Button>

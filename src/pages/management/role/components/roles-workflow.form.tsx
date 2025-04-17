@@ -88,10 +88,10 @@ const RolesWorkflowForm: React.FC<Props> = ({
               error={errors.position}
             />
             <div className="pb-4 flex flex-row justify-end gap-4">
-              <Button onClick={togleModal} variant="danger">
+              <Button onClick={togleModal} color="danger">
                 close
               </Button>
-              <Button type="submit" variant="success">
+              <Button type="submit" color="success">
                 Simpan
               </Button>
             </div>

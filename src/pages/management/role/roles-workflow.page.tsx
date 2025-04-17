@@ -52,7 +52,7 @@ const RolesWorkflowPage: React.FC = () => {
                 setSelectedData(null);
                 setIsOpen({ ...isOpen, form: true });
               }}
-              variant="info"
+              color="info"
             >
               Tambah
             </Button>
@@ -99,7 +99,7 @@ const RolesWorkflowPage: React.FC = () => {
                           setSelectedData(user);
                           setIsOpen({ ...isOpen, form: true });
                         }}
-                        variant="warning"
+                        color="warning"
                       >
                         Edit
                       </Button>
@@ -108,7 +108,7 @@ const RolesWorkflowPage: React.FC = () => {
                           setSelectedData(user);
                           setIsOpen({ ...isOpen, delete: true });
                         }}
-                        variant="danger"
+                        color="danger"
                       >
                         Delete
                       </Button>

@@ -73,7 +73,7 @@ const LoginPage = () => {
             <Button
               disabled={loading}
               fullwidth
-              variant="success"
+              color="success"
               type="submit"
             >
               Masuk

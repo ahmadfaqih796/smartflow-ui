@@ -5,13 +5,14 @@ type Props = {
   disabled?: boolean;
   style?: React.CSSProperties;
   type?: "submit" | "reset" | "button";
-  variant?: "success" | "danger" | "warning" | "info";
+  color?: "success" | "danger" | "warning" | "info";
+  variant?: "contained" | "rounded";
   fullwidth?: boolean;
   onClick?: () => void;
 };
 
 export const Button = ({ children, ...props }: Props) => {
-  const getVariant = (value?: string) => {
+  const getColor = (value?: string) => {
     switch (value) {
       case "success":
         return "bg-green-400 dark:bg-green-800";
@@ -30,10 +31,12 @@ export const Button = ({ children, ...props }: Props) => {
     <button
       {...props}
       className={`${
-        props.disabled ? "bg-gray-400 cursor-not-allowed" : `${getVariant(props.variant)} cursor-pointer`
-      } ${
-        props.fullwidth ? "w-full" : ""
-      }  text-white font-bold py-2 px-4 rounded transition duration-1000 ease-in-out`}
+        props.disabled
+          ? "bg-gray-400 cursor-not-allowed"
+          : `${getColor(props.color)} cursor-pointer`
+      } ${props.fullwidth ? "w-full" : ""} ${
+        props.variant === "rounded" ? "rounded-full py-2 px-2" : "rounded py-2 px-4"
+      } text-white font-bold rounded transition duration-1000 ease-in-out`}
     >
       {children}
     </button>

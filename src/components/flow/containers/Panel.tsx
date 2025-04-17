@@ -72,7 +72,6 @@ const Panel = () => {
         {SHAPE_LIST_FLOW_DIAGRAM.map((shape) => (
           <MenuPanel key={shape} item={shape} onDragStart={onDragStart} />
         ))}
-      
       </div>
     </div>
   );

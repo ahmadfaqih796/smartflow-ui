@@ -24,10 +24,10 @@ const ActionModal: React.FC<Props> = ({
         <div className={`px-4 pt-6 overflow-y-auto max-h-[70vh] ${SCROLLBAR}`}>
           <p className="text-gray-600 dark:text-gray-400 mb-4">{desc}</p>
           <div className="pb-4 flex flex-row justify-end gap-4">
-            <Button onClick={togleModal} variant="danger">
+            <Button onClick={togleModal} color="danger">
               close
             </Button>
-            <Button onClick={onSubmit} variant="success">
+            <Button onClick={onSubmit} color="success">
               yes
             </Button>
           </div>

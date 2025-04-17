@@ -10,15 +10,16 @@ import ReactFlow, {
   MiniMap,
   Node,
   ReactFlowProvider,
-  useReactFlow
+  useReactFlow,
 } from "reactflow";
 import "reactflow/dist/style.css";
 import Panel from "./containers/Panel";
 import { DiamondNode, EndNode, RectangleNode, StartNode } from "./elements";
+import Action from "./containers/Action";
 
 type FlowProps = {
-  data? : any
-}
+  data?: any;
+};
 
 const nodeTypes = {
   start: StartNode,
@@ -27,9 +28,7 @@ const nodeTypes = {
   end: EndNode,
 };
 
-
-
-const FlowDiagram :React.FC<FlowProps> = ({data}) => {
+const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
   const [nodes, setNodes] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
 
@@ -75,13 +74,12 @@ const FlowDiagram :React.FC<FlowProps> = ({data}) => {
   React.useEffect(() => {
     if (data?.data_json) {
       const parsed = JSON.parse(data.data_json);
-      console.log("paredededed", parsed)
+      console.log("paredededed", parsed);
       const mappedNodes = parsed.nodes.map((node: any) => ({
         ...node,
-        type: node.data?.shapeId || node.type
+        type: node.data?.shapeId || node.type,
       }));
       if (parsed.nodes && parsed.edges) {
-        
         setNodes(mappedNodes);
         setEdges(parsed.edges);
       }
@@ -89,7 +87,7 @@ const FlowDiagram :React.FC<FlowProps> = ({data}) => {
   }, [data]);
 
   return (
-    <div className="flex h-[69.5vh]">
+    <div className="flex h-[69.5vh] justify-between">
       <Panel />
       <div className="flex-1 relative" onDrop={onDrop} onDragOver={onDragOver}>
         <ReactFlow
@@ -101,7 +99,7 @@ const FlowDiagram :React.FC<FlowProps> = ({data}) => {
           nodeTypes={nodeTypes}
           fitView
           defaultEdgeOptions={{
-            type: 'smoothstep',
+            type: "smoothstep",
             animated: true,
             style: {
               // stroke: 'blue',
@@ -120,13 +118,14 @@ const FlowDiagram :React.FC<FlowProps> = ({data}) => {
           <MiniMap nodeStrokeWidth={3} />
         </ReactFlow>
       </div>
+      <Action />
     </div>
   );
 };
 
-const DiagramWrapper : React.FC<FlowProps> = ({data}) => (
+const DiagramWrapper: React.FC<FlowProps> = ({ data }) => (
   <ReactFlowProvider>
-    <FlowDiagram data={data}  />
+    <FlowDiagram data={data} />
   </ReactFlowProvider>
 );
 
