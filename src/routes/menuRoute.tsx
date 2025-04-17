@@ -18,7 +18,7 @@ export const MENU_ROUTE = [
     path: "/home",
     name: "Dashboard",
     icon: <GridIcon />,
-    element: lazy(() => import("../pages/dashboard")),
+    element: lazy(() => import("../pages/secure/dashboard")),
   },
   {
     icon: <BoxCubeIcon />,
@@ -28,12 +28,12 @@ export const MENU_ROUTE = [
         name: "User",
         path: "/management/users",
         count: 4,
-        element: lazy(() => import("../pages/management/user/user.page")),
+        element: lazy(() => import("../pages/secure/management/user/user.page")),
       },
       {
         name: "Roles Workflow",
         path: "/management/roles-workflow",
-        element: lazy(() => import("../pages/management/role/roles-workflow.page")),
+        element: lazy(() => import("../pages/secure/management/role/roles-workflow.page")),
       },
     ],
   },
@@ -41,6 +41,6 @@ export const MENU_ROUTE = [
     path: "/workflow",
     name: "Workflow",
     icon: <ListIcon />,
-    element: lazy(() => import("../pages/workflow/workflow.page")),
+    element: lazy(() => import("../pages/secure/workflow/workflow.page")),
   },
 ];

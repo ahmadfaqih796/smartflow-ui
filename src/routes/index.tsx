@@ -3,6 +3,7 @@ import AppLayout from "@/templates/SimpleLayout";
 import { JSX, Suspense } from "react";
 import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router";
 import { MENU_ROUTE } from "./menuRoute";
+import NotFoundPage from "@/pages/errors/404.page";
 
 type RouteProps = {
   path: string;
@@ -54,7 +55,7 @@ const AppRoutes = () => {
           <Route path="/403" element={<div>Forbidden</div>} />
           {/* <Route path="/404" element={<NotFound />} />
              <Route path="*" element={<Navigate to="/404" />} /> */}
-          <Route path="*" element={<div>NotFound</div>} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </Router>
