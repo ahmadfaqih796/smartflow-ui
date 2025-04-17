@@ -49,7 +49,7 @@ class HttpClient {
         if (error.response?.status === 401) {
           window.location.href = `/auth/login?sessionExpired=true`;
         }
-        if ((error.response as any).data.message === "Internal Server Error") {
+        if (error.code === "ERR_BAD_RESPONSE") {
           window.location.href = `/500`;
         }
         return Promise.reject(error);
