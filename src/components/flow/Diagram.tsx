@@ -32,6 +32,8 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
   const [nodes, setNodes] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
 
+  console.log("masuuuu", nodes, edges);
+
   const onNodesChange = useCallback(
     (changes: any) => setNodes((nds) => applyNodeChanges(changes, nds)),
     []
