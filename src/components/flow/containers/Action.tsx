@@ -5,6 +5,7 @@ import BaseService from "@/lib/services/BaseService";
 import { Check, Download, GitPullRequest, Save, X } from "lucide-react";
 import React from "react";
 import useDiagram from "../hooks/diagram.hook";
+import useDiagramValidation from "../validations/diagram.validation";
 
 type Props = {
   data: any;
@@ -18,11 +19,26 @@ const Action: React.FC<Props> = ({ data }) => {
   const [isPending, startTransition] = React.useTransition();
 
   const handleSave = async () => {
-    const dataJson = serialize(data);
+    const { id, nodes, edges } = data;
+    const { typeDiagram } = useDiagramValidation();
+
+    const nodesMapping = nodes.map((item: any) => {
+      return {
+        ...item,
+        type: typeDiagram(item.type),
+      };
+    });
+
+    const dataJson = serialize({
+      nodes: nodesMapping,
+      edges,
+    });
+
     const payload = {
-      id: data.id,
+      id: id,
       data_json: dataJson,
     };
+    console.log("rerererrrr", payload);
     try {
       startTransition(async () => {
         await service.put("/workflow/draf_diagram", null, payload);

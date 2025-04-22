@@ -16,6 +16,7 @@ import "reactflow/dist/style.css";
 import Action from "./containers/Action";
 import Panel from "./containers/Panel";
 import { DiamondNode, EndNode, RectangleNode, StartNode } from "./elements";
+import useDiagramValidation from "./validations/diagram.validation";
 
 type FlowProps = {
   data?: any;
@@ -29,6 +30,7 @@ const nodeTypes = {
 };
 
 const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
+  const { edgesPosition } = useDiagramValidation();
   const [nodes, setNodes] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
 
@@ -59,9 +61,13 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
       });
       const newNode: Node = {
         id: `${+new Date()}`,
-        type,
+        type: type,
         position,
-        data: { label: `${type}` },
+        data: {
+          edgesPosition: edgesPosition(type),
+          label: type,
+          shapeId: type,
+        },
       };
       setNodes((nds) => nds.concat(newNode));
     },
@@ -76,7 +82,6 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
   React.useEffect(() => {
     if (data?.data_json) {
       const parsed = JSON.parse(data.data_json);
-      console.log("paredededed", parsed);
       const mappedNodes = parsed.nodes.map((node: any) => ({
         ...node,
         type: node.data?.shapeId || node.type,
