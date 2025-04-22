@@ -1,12 +1,10 @@
-import { Handle, NodeProps, Position, useStore } from "reactflow";
-import { COLOR_SHAPE_FLOW_DIAGRAM } from "../constants/digram.constant";
 import React from "react";
+import { Handle, NodeProps, Position } from "reactflow";
+import { COLOR_SHAPE_FLOW_DIAGRAM } from "../constants/digram.constant";
 
-const SquareNode = ({ id, data }: NodeProps) => {
-  const edges = useStore((state) => state.edges);
+const SquareNode = ({ data }: NodeProps) => {
   const [isEditing, setIsEditing] = React.useState(false);
   const [label, setLabel] = React.useState(data.label);
-  console.log("edges", edges, id)
   return (
     <div
       className={`w-[130px] h-[138px] ${COLOR_SHAPE_FLOW_DIAGRAM.square} relative`}
@@ -17,14 +15,16 @@ const SquareNode = ({ id, data }: NodeProps) => {
           type="text"
           value={label}
           autoFocus
+          maxLength={20}
           onBlur={() => setIsEditing(false)}
           onChange={(e) => setLabel(e.target.value)}
           className="border rounded px-2 py-1 text-sm w-full"
         />
       ) : (
-        <div className="text-sm">{label}</div>
+        <div className="text-sm text-center break-all">{label}</div>
       )}
       <Handle
+        id="square-top"
         type="target"
         position={Position.Top}
         style={{
@@ -35,6 +35,7 @@ const SquareNode = ({ id, data }: NodeProps) => {
       />
 
       <Handle
+        id="square-left"
         type="target"
         position={Position.Left}
         style={{
@@ -45,7 +46,8 @@ const SquareNode = ({ id, data }: NodeProps) => {
       />
 
       <Handle
-        type="target"
+        id="square-right"
+        type="source"
         position={Position.Right}
         style={{
           right: "-8px",
@@ -55,6 +57,7 @@ const SquareNode = ({ id, data }: NodeProps) => {
       />
 
       <Handle
+        id="square-bottom"
         type="source"
         position={Position.Bottom}
         style={{
