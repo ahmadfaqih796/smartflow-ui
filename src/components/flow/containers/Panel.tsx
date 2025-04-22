@@ -23,6 +23,17 @@ const MenuPanel: React.FC<MenuPanelProps> = ({ item, onDragStart }) => {
           Start
         </div>
       );
+    case "square":
+      return (
+        <div
+          key={item}
+          className={`w-20 h-20 ${COLOR_SHAPE_FLOW_DIAGRAM[item]}`}
+          onDragStart={(e) => onDragStart(e, item)}
+          draggable
+        >
+          Square
+        </div>
+      );
     case "rectangle":
       return (
         <div
@@ -68,7 +79,9 @@ const Panel = () => {
   return (
     <div className="border-r h-full flex flex-col">
       <h4 className="font-bold text-center my-4">Faqih Panel</h4>
-      <div className={`flex-1 gap-2 px-4 overflow-y-auto flex flex-col items-center ${SCROLLBAR}`}>
+      <div
+        className={`flex-1 gap-2 px-4 overflow-y-auto flex flex-col items-center ${SCROLLBAR}`}
+      >
         {SHAPE_LIST_FLOW_DIAGRAM.map((shape) => (
           <MenuPanel key={shape} item={shape} onDragStart={onDragStart} />
         ))}

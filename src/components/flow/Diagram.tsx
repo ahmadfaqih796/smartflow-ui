@@ -15,8 +15,15 @@ import ReactFlow, {
 import "reactflow/dist/style.css";
 import Action from "./containers/Action";
 import Panel from "./containers/Panel";
-import { DiamondNode, EndNode, RectangleNode, StartNode } from "./elements";
+import {
+  DiamondNode,
+  EndNode,
+  RectangleNode,
+  SquareNode,
+  StartNode,
+} from "./elements";
 import useDiagramValidation from "./validations/diagram.validation";
+import useDiagram from "./hooks/diagram.hook";
 
 type FlowProps = {
   data?: any;
@@ -27,14 +34,15 @@ const nodeTypes = {
   rectangle: RectangleNode,
   diamond: DiamondNode,
   end: EndNode,
+  square: SquareNode,
 };
 
 const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
+  const { normalizeEdges } = useDiagram();
   const { edgesPosition } = useDiagramValidation();
   const [nodes, setNodes] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
-
-  // console.log("masuuuu", JSON.parse(data?.data_json));
+  // console.log("edddddgets", edges);
 
   const onNodesChange = useCallback(
     (changes: any) => setNodes((nds) => applyNodeChanges(changes, nds)),
@@ -44,10 +52,9 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
     (changes: any) => setEdges((eds) => applyEdgeChanges(changes, eds)),
     []
   );
-  const onConnect = useCallback(
-    (connection: Connection) => setEdges((eds) => addEdge(connection, eds)),
-    []
-  );
+  const onConnect = useCallback((connection: Connection) => {
+    setEdges((eds) => addEdge(connection, eds));
+  }, []);
 
   const { project } = useReactFlow();
 
@@ -63,6 +70,7 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
         id: `${+new Date()}`,
         type: type,
         position,
+        positionAbsolute: position,
         data: {
           edgesPosition: edgesPosition(type),
           label: type,
@@ -88,7 +96,7 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
       }));
       if (parsed.nodes && parsed.edges) {
         setNodes(mappedNodes);
-        setEdges(parsed.edges);
+        setEdges(normalizeEdges(parsed.edges));
       }
     }
   }, [data]);
