@@ -6,6 +6,7 @@ const RectangleNode = ({ data }: NodeProps) => {
     <div className={`w-[180px] h-[90px] ${COLOR_SHAPE_FLOW_DIAGRAM.rectangle}`}>
       <div className="text-sm">{data.label}</div>
       <Handle
+        id="top"
         type="target"
         position={Position.Top}
         style={{
@@ -18,6 +19,7 @@ const RectangleNode = ({ data }: NodeProps) => {
         // }
       />
       <Handle
+        id="bottom"
         type="source"
         position={Position.Bottom}
         style={{
