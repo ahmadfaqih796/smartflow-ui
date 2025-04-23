@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from "react";
 import ReactFlow, {
-  addEdge,
   applyEdgeChanges,
   applyNodeChanges,
   Connection,
@@ -50,9 +49,51 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
     (changes: any) => setEdges((eds) => applyEdgeChanges(changes, eds)),
     []
   );
-  const onConnect = useCallback((connection: Connection) => {
-    setEdges((eds) => addEdge(connection, eds));
-  }, []);
+  // const onConnect = useCallback((connection: Connection) => {
+  //   setEdges((eds) => addEdge(connection, eds));
+  // }, []);
+  const onConnect = useCallback(
+    (connection: Connection) => {
+      setEdges((eds) => {
+        const sourceNode = nodes.find((n) => n.id === connection.source);
+        const targetNode = nodes.find((n) => n.id === connection.target);
+
+        if (!sourceNode || !targetNode) return eds;
+
+        const newEdge: any = {
+          ...connection,
+          id: `${connection.sourceHandle || "null"}_${connection.source}__${connection.targetHandle || "null"}_${
+            connection.target
+          }`,
+          type: "smoothstep",
+          markerEnd: {
+            type: MarkerType.ArrowClosed,
+            width: 10,
+            height: 10,
+          },
+          data: {
+            label: "",
+            source: {
+              id: sourceNode.id,
+              shapeId: sourceNode.data?.shapeId,
+              label: sourceNode.data?.label,
+            },
+            target: {
+              id: targetNode.id,
+              shapeId: targetNode.data?.shapeId,
+              label: targetNode.data?.label,
+            },
+            // type: "next",
+          },
+        };
+
+        console.log("wwwwwww", sourceNode, targetNode, connection, newEdge);
+
+        return [...eds, newEdge];
+      });
+    },
+    [nodes]
+  );
 
   const { project } = useReactFlow();
 
@@ -160,7 +201,7 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
           onReset: () => {
             setNodes([]);
             setEdges([]);
-          }
+          },
         }}
         data={{
           id: data?.id,

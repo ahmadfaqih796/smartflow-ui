@@ -14,6 +14,7 @@ import {
 import React from "react";
 import useDiagram from "../hooks/diagram.hook";
 import useDiagramValidation from "../validations/diagram.validation";
+import { capitalizeFirstLetter } from "@/utils/fontCase";
 
 type Props = {
   action?: {
@@ -40,6 +41,23 @@ const Action: React.FC<Props> = ({ data, action }) => {
         type: typeDiagram(item.type),
       };
     });
+
+    const roleDetail = edges.map((item: any) => {
+      const sourceNode = item.source.split("-")[0];
+      console.log("vvvvv", sourceNode);
+
+      return {
+        curr_role: capitalizeFirstLetter(sourceNode),
+        role_next: "Rectangle",
+        role_reject: null,
+        role_type: "Rectangle",
+        role_sla: null,
+        role_sla2: null,
+        comment: null,
+      };
+    });
+
+    console.log("roleDetail", edges, roleDetail);
 
     const dataJson = serialize({
       nodes: nodesMapping,
