@@ -6,6 +6,7 @@ const EndNode = ({ data }: NodeProps) => {
     <div className={`w-[180px] h-[88px] ${COLOR_SHAPE_FLOW_DIAGRAM.end}`}>
       <div className="text-sm">{data.label}</div>
       <Handle
+        id="top"
         type="target"
         position={Position.Top}
         style={{
