@@ -72,7 +72,7 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
             height: 10,
           },
           data: {
-            label: "",
+            label: targetNode.data.label,
             source: {
               id: sourceNode.id,
               shapeId: sourceNode.data?.shapeId,

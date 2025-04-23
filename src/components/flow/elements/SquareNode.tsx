@@ -1,11 +1,38 @@
 import React from "react";
-import { Handle, NodeProps, Position, useStore } from "reactflow";
+import {
+  Handle,
+  Node,
+  NodeProps,
+  Position,
+  useReactFlow,
+  useStore,
+} from "reactflow";
 import { COLOR_SHAPE_FLOW_DIAGRAM } from "../constants/digram.constant";
 
-const SquareNode = ({ data }: NodeProps) => {
+const SquareNode = ({ id, data }: NodeProps) => {
   const edges = useStore((state) => state.edges);
+  const { setNodes } = useReactFlow();
   const [isEditing, setIsEditing] = React.useState(false);
   const [label, setLabel] = React.useState(data.label);
+
+  const handleLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newLabel = e.target.value;
+    setLabel(newLabel);
+    setNodes((prevNodes: Node[]) =>
+      prevNodes.map((node: Node) =>
+        node.id === id
+          ? {
+              ...node,
+              data: {
+                ...node.data,
+                label: newLabel,
+              },
+            }
+          : node
+      )
+    );
+  };
+
   return (
     <div
       className={`w-[130px] h-[138px] ${COLOR_SHAPE_FLOW_DIAGRAM.square} relative`}
@@ -18,7 +45,7 @@ const SquareNode = ({ data }: NodeProps) => {
           autoFocus
           maxLength={20}
           onBlur={() => setIsEditing(false)}
-          onChange={(e) => setLabel(e.target.value)}
+          onChange={(e) => handleLabelChange(e)}
           className="border rounded px-2 py-1 text-sm w-full"
         />
       ) : (
@@ -33,7 +60,9 @@ const SquareNode = ({ data }: NodeProps) => {
           width: "10px",
           height: "10px",
         }}
-        isValidConnection={() => edges.filter((x) => x.id.includes("start")).length === 0}
+        isValidConnection={() =>
+          edges.filter((x) => x.id.includes("start")).length === 0
+        }
       />
 
       <Handle
@@ -45,8 +74,9 @@ const SquareNode = ({ data }: NodeProps) => {
           width: "10px",
           height: "10px",
         }}
-        isValidConnection={() => edges.filter((x) => x.id.includes("start")).length === 0}
-
+        isValidConnection={() =>
+          edges.filter((x) => x.id.includes("start")).length === 0
+        }
       />
 
       <Handle
