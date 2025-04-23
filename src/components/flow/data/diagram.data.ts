@@ -177,5 +177,33 @@ export const diagramData = {
       dragging: false,
     },
   ],
- 
+  roleDetail: [
+    {
+      curr_role: "Start",
+      role_next: "UNIT KERja",
+      role_reject: null,
+      role_type: "Rectangle",
+      role_sla: null,
+      role_sla2: null,
+      comment: null,
+    },
+    {
+      curr_role: "UNIT KERja",
+      role_next: "IT USR",
+      role_reject: null,
+      role_type: "Square",
+      role_sla: null,
+      role_sla2: null,
+      comment: null,
+    },
+    {
+      curr_role: "IT USR",
+      role_next: "End",
+      role_reject: null,
+      role_type: "End",
+      role_sla: null,
+      role_sla2: null,
+      comment: null,
+    },
+  ],
 };

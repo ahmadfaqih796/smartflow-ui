@@ -43,14 +43,13 @@ const Action: React.FC<Props> = ({ data, action }) => {
     });
 
     const roleDetail = edges.map((item: any) => {
-      const sourceNode = item.source.split("-")[0];
-      console.log("vvvvv", sourceNode);
-
+      const sourceNode = item.data.source.label.split("-")[0];
+      const targetNode = item.data.target.label.split("-")[0];
       return {
         curr_role: capitalizeFirstLetter(sourceNode),
-        role_next: "Rectangle",
+        role_next: capitalizeFirstLetter(targetNode),
         role_reject: null,
-        role_type: "Rectangle",
+        role_type: capitalizeFirstLetter(item.data.target.shapeId),
         role_sla: null,
         role_sla2: null,
         comment: null,
@@ -62,6 +61,7 @@ const Action: React.FC<Props> = ({ data, action }) => {
     const dataJson = serialize({
       nodes: nodesMapping,
       edges,
+      roleDetail,
     });
 
     const payload = {

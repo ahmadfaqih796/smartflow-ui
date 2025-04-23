@@ -121,7 +121,7 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
             shapeId: type,
           },
         };
-        console.log("vvvv", nds, count);
+        // console.log("vvvv", nds, count);
         return nds.concat(newNode);
       });
     },
