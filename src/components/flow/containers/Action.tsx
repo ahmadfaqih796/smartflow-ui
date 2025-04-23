@@ -2,18 +2,21 @@ import { ButtonIcon } from "@/components/button/Button";
 import { SCROLLBAR } from "@/constants/theme";
 import { useAlert } from "@/context/AlertContext";
 import BaseService from "@/lib/services/BaseService";
-import { Check, Download, GitPullRequest, Save, X } from "lucide-react";
+import { Check, Download, GitPullRequest, RotateCcw, Save, X } from "lucide-react";
 import React from "react";
 import useDiagram from "../hooks/diagram.hook";
 import useDiagramValidation from "../validations/diagram.validation";
 
 type Props = {
+  action?: {
+    onLoad?: () => void;
+  };
   data: any;
 };
 
 const service = new BaseService();
 
-const Action: React.FC<Props> = ({ data }) => {
+const Action: React.FC<Props> = ({ data,action }) => {
   const { serialize } = useDiagram();
   const { showAlert } = useAlert();
   const [isPending, startTransition] = React.useTransition();
@@ -63,6 +66,11 @@ const Action: React.FC<Props> = ({ data }) => {
           color="success"
         >
           <Save />
+        </ButtonIcon>
+        <ButtonIcon
+        onClick={() => action?.onLoad}
+        tooltip="Restart" position="bottom" color="warning">
+          <RotateCcw />
         </ButtonIcon>
         <ButtonIcon tooltip="Request" position="bottom" color="info">
           <GitPullRequest />

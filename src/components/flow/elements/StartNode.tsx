@@ -10,6 +10,7 @@ const StartNode = ({ id, data }: NodeProps) => {
     >
       <div className="text-sm">{data.label}</div>
       <Handle
+        id="bottom"
         type="source"
         position={Position.Bottom}
         style={{
@@ -20,7 +21,6 @@ const StartNode = ({ id, data }: NodeProps) => {
           // transform: "none"
         }}
         isValidConnection={() => outgoing.length === 0}
-      
       />
     </div>
   );

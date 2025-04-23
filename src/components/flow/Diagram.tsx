@@ -23,7 +23,6 @@ import {
   StartNode,
 } from "./elements";
 import useDiagramValidation from "./validations/diagram.validation";
-import useDiagram from "./hooks/diagram.hook";
 
 type FlowProps = {
   data?: any;
@@ -38,11 +37,10 @@ const nodeTypes = {
 };
 
 const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
-  const { normalizeEdges } = useDiagram();
+  // const { normalizeEdges } = useDiagram();
   const { edgesPosition } = useDiagramValidation();
   const [nodes, setNodes] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
-  // console.log("edddddgets", edges);
 
   const onNodesChange = useCallback(
     (changes: any) => setNodes((nds) => applyNodeChanges(changes, nds)),
@@ -61,23 +59,30 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
   const onDrop = useCallback(
     (event: React.DragEvent) => {
       event.preventDefault();
-      const type = event.dataTransfer.getData("application/reactflow");
+      const type = event.dataTransfer.getData(
+        "application/reactflow"
+      ) as string;
       const position = project({
         x: event.clientX - 250,
         y: event.clientY - 150,
       });
-      const newNode: Node = {
-        id: `${+new Date()}`,
-        type: type,
-        position,
-        positionAbsolute: position,
-        data: {
-          edgesPosition: edgesPosition(type),
-          label: type,
-          shapeId: type,
-        },
-      };
-      setNodes((nds) => nds.concat(newNode));
+
+      setNodes((nds: Node[]) => {
+        const count = (nds.length || 0) + 1;
+        const newNode: Node = {
+          id: `${type}-${count}`,
+          type: type,
+          position,
+          positionAbsolute: position,
+          data: {
+            edgesPosition: edgesPosition(type),
+            label: type,
+            shapeId: type,
+          },
+        };
+        console.log("vvvv", nds, count);
+        return nds.concat(newNode);
+      });
     },
     [project]
   );
@@ -87,7 +92,7 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
     event.dataTransfer.dropEffect = "move";
   };
 
-  React.useEffect(() => {
+  const onLoadData = () => {
     if (data?.data_json) {
       const parsed = JSON.parse(data.data_json);
       const mappedNodes = parsed.nodes.map((node: any) => ({
@@ -96,22 +101,38 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
       }));
       if (parsed.nodes && parsed.edges) {
         setNodes(mappedNodes);
-        setEdges(normalizeEdges(parsed.edges));
+        setEdges(parsed.edges);
       }
     }
+  };
+
+  React.useEffect(() => {
+    setEdges([]);
+    setNodes([]);
+    if (data?.data_json) {
+      setTimeout(() => onLoadData(), 300);
+    }
   }, [data]);
+
+  // const edgeTypes = {
+  //   step: StepEdge,
+  //   sine: SineEdge,
+  // };
 
   return (
     <div className="flex h-[69.5vh] justify-between">
       <Panel />
       <div className="flex-1 relative" onDrop={onDrop} onDragOver={onDragOver}>
         <ReactFlow
+          // defaultNodes={initialNodes}
+          // defaultEdges={initialEdges}
+          // edgeTypes={edgeTypes}
+          nodeTypes={nodeTypes}
           nodes={nodes}
           edges={edges}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
-          nodeTypes={nodeTypes}
           fitView
           defaultEdgeOptions={{
             type: "smoothstep",
@@ -134,6 +155,9 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
         </ReactFlow>
       </div>
       <Action
+        action={{
+          onLoad: onLoadData,
+        }}
         data={{
           id: data?.id,
           nodes,
