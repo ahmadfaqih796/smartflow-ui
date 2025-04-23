@@ -37,9 +37,9 @@ const Modal: React.FC<UserModalProps> = ({
       `}
     >
       <div
-        className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg ${ANIMATION} ${
-          open ? "opacity-100 scale-100" : "opacity-0 scale-95"
-        } ${fullwidth ? "w-full" : "w-full max-w-md"}`}
+        className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg ${ANIMATION} 
+        ${open ? "opacity-100 scale-100" : "opacity-0 scale-95"} 
+        ${fullwidth ? "w-full" : "w-full max-w-md"}`}
       >
         <div className="relative flex items-center justify-between m-4">
           <h2 className="text-lg font-semibold text-gray-800 dark:text-white">

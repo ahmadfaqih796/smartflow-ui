@@ -120,7 +120,7 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
   // };
 
   return (
-    <div className="flex h-[69.5vh] justify-between">
+    <div className="flex h-[83.5vh] justify-between">
       <Panel />
       <div className="flex-1 relative" onDrop={onDrop} onDragOver={onDragOver}>
         <ReactFlow
@@ -157,6 +157,10 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
       <Action
         action={{
           onLoad: onLoadData,
+          onReset: () => {
+            setNodes([]);
+            setEdges([]);
+          }
         }}
         data={{
           id: data?.id,

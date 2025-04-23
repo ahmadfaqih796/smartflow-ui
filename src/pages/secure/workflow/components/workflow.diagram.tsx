@@ -24,7 +24,7 @@ const WorkflowDiagram: React.FC<Props> = ({
         fullwidth
       >
         <div
-          className={`overflow-y-hidden max-h-[66.7vh] rounded-xl shadow-lg 
+          className={`overflow-y-hidden max-h-[80vh] rounded-xl shadow-lg 
         ${SCROLLBAR}
         ${ANIMATION}
         ${open ? "w-full" : "w-[0px]"}

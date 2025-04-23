@@ -2,7 +2,15 @@ import { ButtonIcon } from "@/components/button/Button";
 import { SCROLLBAR } from "@/constants/theme";
 import { useAlert } from "@/context/AlertContext";
 import BaseService from "@/lib/services/BaseService";
-import { Check, Download, GitPullRequest, RotateCcw, Save, X } from "lucide-react";
+import {
+  Check,
+  Download,
+  GitPullRequest,
+  RotateCcw,
+  Save,
+  Trash2,
+  X,
+} from "lucide-react";
 import React from "react";
 import useDiagram from "../hooks/diagram.hook";
 import useDiagramValidation from "../validations/diagram.validation";
@@ -10,13 +18,14 @@ import useDiagramValidation from "../validations/diagram.validation";
 type Props = {
   action?: {
     onLoad?: () => void;
+    onReset?: () => void;
   };
   data: any;
 };
 
 const service = new BaseService();
 
-const Action: React.FC<Props> = ({ data,action }) => {
+const Action: React.FC<Props> = ({ data, action }) => {
   const { serialize } = useDiagram();
   const { showAlert } = useAlert();
   const [isPending, startTransition] = React.useTransition();
@@ -54,10 +63,12 @@ const Action: React.FC<Props> = ({ data,action }) => {
   };
   return (
     <div className="border-l h-full flex flex-col">
-      <h4 className="font-bold text-center my-4">Action</h4>
+      <h4 className="font-bold text-center px-1 border-b py-4">Faqih Toggle</h4>
+      {/* <main className={`bg-gray-100 h-[calc(100%-60px)]`}></main> */}
       <div
-        className={`flex-1 gap-2 px-4 overflow-y-auto flex flex-col items-center ${SCROLLBAR}`}
+        className={`flex-1 gap-2 px-4 pb-4 overflow-y-auto flex flex-col items-center ${SCROLLBAR}`}
       >
+        <h4 className="font-bold text-center my-1">Action</h4>
         <ButtonIcon
           loading={isPending}
           onClick={() => handleSave()}
@@ -68,20 +79,32 @@ const Action: React.FC<Props> = ({ data,action }) => {
           <Save />
         </ButtonIcon>
         <ButtonIcon
-        onClick={() => action?.onLoad}
-        tooltip="Restart" position="bottom" color="warning">
+          onClick={() => action?.onLoad?.()}
+          tooltip="Restart"
+          position="bottom"
+          color="warning"
+        >
           <RotateCcw />
         </ButtonIcon>
-        <ButtonIcon tooltip="Request" position="bottom" color="info">
-          <GitPullRequest />
+        <ButtonIcon
+          onClick={() => action?.onReset?.()}
+          tooltip="Reset"
+          position="bottom"
+          color="danger"
+        >
+          <Trash2 />
         </ButtonIcon>
         <ButtonIcon tooltip="Download" position="bottom" color="warning">
           <Download />
         </ButtonIcon>
+        <h4 className="font-bold text-center my-1">Validasi</h4>
+        <ButtonIcon tooltip="Request" position="bottom" color="info">
+          <GitPullRequest />
+        </ButtonIcon>
         <ButtonIcon tooltip="Approve" position="bottom" color="success">
           <Check />
         </ButtonIcon>
-        <ButtonIcon tooltip="Reject" position="bottom" color="danger">
+        <ButtonIcon tooltip="Reject" position="top" color="danger">
           <X />
         </ButtonIcon>
       </div>
