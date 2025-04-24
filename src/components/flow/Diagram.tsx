@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import ReactFlow, {
   applyEdgeChanges,
   applyNodeChanges,
@@ -38,21 +38,22 @@ const nodeTypes = {
 const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
   // const { normalizeEdges } = useDiagram();
   const { edgesPosition } = useDiagramValidation();
-  const [nodes, setNodes] = useState<Node[]>([]);
-  const [edges, setEdges] = useState<Edge[]>([]);
+  const [nodes, setNodes] = React.useState<Node[]>([]);
+  const [edges, setEdges] = React.useState<Edge[]>([]);
+  const [selectedEdgeId, setSelectedEdgeId] = React.useState<string | null>(null);
 
-  const onNodesChange = useCallback(
+  const onNodesChange = React.useCallback(
     (changes: any) => setNodes((nds) => applyNodeChanges(changes, nds)),
     []
   );
-  const onEdgesChange = useCallback(
+  const onEdgesChange = React.useCallback(
     (changes: any) => setEdges((eds) => applyEdgeChanges(changes, eds)),
     []
   );
-  // const onConnect = useCallback((connection: Connection) => {
+  // const onConnect = React.useCallback((connection: Connection) => {
   //   setEdges((eds) => addEdge(connection, eds));
   // }, []);
-  const onConnect = useCallback(
+  const onConnect = React.useCallback(
     (connection: Connection) => {
       setEdges((eds) => {
         const sourceNode = nodes.find((n) => n.id === connection.source);
@@ -97,7 +98,7 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
 
   const { project } = useReactFlow();
 
-  const onDrop = useCallback(
+  const onDrop = React.useCallback(
     (event: React.DragEvent) => {
       event.preventDefault();
       const type = event.dataTransfer.getData(
@@ -155,6 +156,10 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
     }
   }, [data]);
 
+  const onEdgeClick = (_: any, edge: Edge) => {
+    setSelectedEdgeId(edge.id);
+  };
+
   // const edgeTypes = {
   //   step: StepEdge,
   //   sine: SineEdge,
@@ -170,7 +175,17 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
           // edgeTypes={edgeTypes}
           nodeTypes={nodeTypes}
           nodes={nodes}
-          edges={edges}
+          edges={edges.map((edge) => ({
+            ...edge,
+            style: {
+              // stroke: edge.id === selectedEdgeId ? "#3b82f6" : "black",
+            },
+            markerEnd: {
+              type: MarkerType.ArrowClosed,
+              // color: edge.id === selectedEdgeId ? "#3b82f6" : "black",
+            }
+          }))}
+          // onEdgeClick={onEdgeClick}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
@@ -179,7 +194,7 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
             type: "smoothstep",
             animated: true,
             style: {
-              // stroke: 'blue',
+              // stroke: 'black',
               strokeWidth: 2,
             },
             markerEnd: {

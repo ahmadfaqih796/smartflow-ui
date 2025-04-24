@@ -2,6 +2,7 @@ import { ButtonIcon } from "@/components/button/Button";
 import { SCROLLBAR } from "@/constants/theme";
 import { useAlert } from "@/context/AlertContext";
 import BaseService from "@/lib/services/BaseService";
+import { capitalizeFirstLetter } from "@/utils/fontCase";
 import {
   Check,
   Download,
@@ -12,9 +13,9 @@ import {
   X,
 } from "lucide-react";
 import React from "react";
+import useActionDiagram from "../hooks/action.hook";
 import useDiagram from "../hooks/diagram.hook";
 import useDiagramValidation from "../validations/diagram.validation";
-import { capitalizeFirstLetter } from "@/utils/fontCase";
 
 type Props = {
   action?: {
@@ -29,6 +30,7 @@ const service = new BaseService();
 const Action: React.FC<Props> = ({ data, action }) => {
   const { serialize } = useDiagram();
   const { showAlert } = useAlert();
+  const { onDownload } = useActionDiagram();
   const [isPending, startTransition] = React.useTransition();
 
   const handleSave = async () => {
@@ -112,7 +114,12 @@ const Action: React.FC<Props> = ({ data, action }) => {
         >
           <Trash2 />
         </ButtonIcon>
-        <ButtonIcon tooltip="Download" position="bottom" color="warning">
+        <ButtonIcon
+          onClick={onDownload}
+          tooltip="Download"
+          position="bottom"
+          color="warning"
+        >
           <Download />
         </ButtonIcon>
         <h4 className="font-bold text-center my-1">Validasi</h4>
