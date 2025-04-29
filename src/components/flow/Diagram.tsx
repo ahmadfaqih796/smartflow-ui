@@ -22,6 +22,7 @@ import {
   SlaNode,
   SquareNode,
   StartNode,
+  TimeNode,
 } from "./elements";
 import useDiagramValidation from "./validations/diagram.validation";
 
@@ -35,7 +36,8 @@ const nodeTypes = {
   diamond: DiamondNode,
   end: EndNode,
   square: SquareNode,
-  sla: SlaNode
+  sla: SlaNode,
+  time: TimeNode,
 };
 
 const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
@@ -173,7 +175,7 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
   };
   const onNodeDoubleClick = (_: any, node: Node) => {
     setSelectedEdgeId(null);
-    if (!["start", "end", "sla"].includes(node.type as string)) {
+    if (!["start", "end", "sla", "time"].includes(node.type as string)) {
       setSelectedData({ node: node, edge: null });
       setIsOpen({ ...isOpen, form: true });
     }

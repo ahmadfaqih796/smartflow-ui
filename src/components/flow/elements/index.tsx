@@ -4,5 +4,6 @@ import RectangleNode from "./RectangleNode";
 import EndNode from "./EndNode";
 import SquareNode from "./SquareNode";
 import SlaNode from "./SlaNode";
+import TimeNode from "./TimeNode";
 
-export { DiamondNode, StartNode, RectangleNode, EndNode, SquareNode, SlaNode };
+export { DiamondNode, StartNode, RectangleNode, EndNode, SquareNode, SlaNode, TimeNode };
