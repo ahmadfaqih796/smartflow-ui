@@ -13,6 +13,7 @@ import ReactFlow, {
 } from "reactflow";
 import "reactflow/dist/style.css";
 import Action from "./containers/Action";
+import NodeModal from "./containers/nodes/NodeFormModal";
 import Panel from "./containers/Panel";
 import {
   DiamondNode,
@@ -41,7 +42,17 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
   const { project } = useReactFlow();
   const [nodes, setNodes] = React.useState<Node[]>([]);
   const [edges, setEdges] = React.useState<Edge[]>([]);
-  const [selectedEdgeId, setSelectedEdgeId] = React.useState<string | null>(null);
+  const [isOpen, setIsOpen] = React.useState({
+    form: false,
+    delete: false,
+  });
+  const [selectedEdgeId, setSelectedEdgeId] = React.useState<string | null>(
+    null
+  );
+  const [selectedData, setSelectedData] = React.useState<any>({
+    node: {} as Node,
+    edge: null,
+  });
 
   const onNodesChange = React.useCallback(
     (changes: any) => setNodes((nds) => applyNodeChanges(changes, nds)),
@@ -64,9 +75,9 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
 
         const newEdge: any = {
           ...connection,
-          id: `${connection.sourceHandle || "null"}_${connection.source}__${connection.targetHandle || "null"}_${
-            connection.target
-          }`,
+          id: `${connection.sourceHandle || "null"}_${connection.source}__${
+            connection.targetHandle || "null"
+          }_${connection.target}`,
           type: "smoothstep",
           markerEnd: {
             type: MarkerType.ArrowClosed,
@@ -158,6 +169,13 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
   const onEdgeClick = (_: any, edge: Edge) => {
     setSelectedEdgeId(edge.id);
   };
+  const onNodeDoubleClick = (_: any, node: Node) => {
+    setSelectedEdgeId(null);
+    if (!["start", "end"].includes(node.data?.label)) {
+      setSelectedData({ node: node, edge: null });
+      setIsOpen({ ...isOpen, form: true });
+    }
+  };
 
   // const edgeTypes = {
   //   step: StepEdge,
@@ -184,12 +202,13 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
               height: 30,
               type: MarkerType.ArrowClosed,
               color: edge.id === selectedEdgeId ? "#3b82f6" : "black",
-            }
+            },
           }))}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
           onEdgeClick={onEdgeClick}
+          onNodeDoubleClick={onNodeDoubleClick}
           onNodeClick={() => setSelectedEdgeId(null)}
           onPaneClick={() => setSelectedEdgeId(null)}
           fitView
@@ -226,6 +245,11 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
           nodes,
           edges,
         }}
+      />
+      <NodeModal
+        open={isOpen.form}
+        togleModal={() => setIsOpen({ ...isOpen, form: false })}
+        data={selectedData.node}
       />
     </div>
   );

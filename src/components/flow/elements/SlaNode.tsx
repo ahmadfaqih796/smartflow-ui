@@ -1,12 +1,44 @@
-import { Handle, NodeProps, Position, useStore } from "reactflow";
+import React from "react";
+import {
+  Handle,
+  Node,
+  NodeProps,
+  Position,
+  useReactFlow,
+  useStore,
+} from "reactflow";
 import { COLOR_SHAPE_FLOW_DIAGRAM } from "../constants/digram.constant";
 
-const SquareNode = ({ data }: NodeProps) => {
+const SlaNode = ({ id, data }: NodeProps) => {
   const edges = useStore((state) => state.edges);
+  const { setNodes } = useReactFlow();
+  const [isEditing, setIsEditing] = React.useState(false);
+  const [label, setLabel] = React.useState(data.label);
+
+  const handleLabelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newLabel = e.target.value;
+    setLabel(newLabel);
+    setNodes((prevNodes: Node[]) =>
+      prevNodes.map((node: Node) =>
+        node.id === id
+          ? {
+              ...node,
+              data: {
+                ...node.data,
+                label: newLabel,
+                comment:
+                  "lorem ipsum dolor sit amet kdokodkoe kdoekdoed kodkeod kokocn cdini oko kokokods",
+              },
+            }
+          : node
+      )
+    );
+  };
 
   return (
     <div
       className={`group w-[130px] h-[138px] ${COLOR_SHAPE_FLOW_DIAGRAM.square} relative`}
+      onDoubleClick={() => setIsEditing(true)}
     >
       {/* Tooltip */}
       {data.comment && (
@@ -22,8 +54,19 @@ const SquareNode = ({ data }: NodeProps) => {
         </div>
       )}
 
-      <div className="text-sm text-center break-all">{data.label}</div>
-
+      {isEditing ? (
+        <input
+          type="text"
+          value={label}
+          autoFocus
+          maxLength={20}
+          onBlur={() => setIsEditing(false)}
+          onChange={(e) => handleLabelChange(e)}
+          className="border rounded px-2 py-1 text-sm w-full"
+        />
+      ) : (
+        <div className="text-sm text-center break-all">{data.label}</div>
+      )}
       <Handle
         id="top"
         type="target"
@@ -77,4 +120,4 @@ const SquareNode = ({ data }: NodeProps) => {
   );
 };
 
-export default SquareNode;
+export default SlaNode;
