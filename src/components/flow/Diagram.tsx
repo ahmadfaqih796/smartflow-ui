@@ -19,6 +19,7 @@ import {
   DiamondNode,
   EndNode,
   RectangleNode,
+  SlaNode,
   SquareNode,
   StartNode,
 } from "./elements";
@@ -34,6 +35,7 @@ const nodeTypes = {
   diamond: DiamondNode,
   end: EndNode,
   square: SquareNode,
+  sla: SlaNode
 };
 
 const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
@@ -171,7 +173,7 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
   };
   const onNodeDoubleClick = (_: any, node: Node) => {
     setSelectedEdgeId(null);
-    if (!["start", "end"].includes(node.data?.label)) {
+    if (!["start", "end", "sla"].includes(node.type as string)) {
       setSelectedData({ node: node, edge: null });
       setIsOpen({ ...isOpen, form: true });
     }

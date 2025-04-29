@@ -57,6 +57,17 @@ const MenuPanel: React.FC<MenuPanelProps> = ({ item, onDragStart }) => {
           Diamond
         </div>
       );
+    case "sla":
+      return (
+        <div
+          key={item}
+          className={`w-16 h-16 ${COLOR_SHAPE_FLOW_DIAGRAM[item]}`}
+          onDragStart={(e) => onDragStart(e, item)}
+          draggable
+        >
+          SLA
+        </div>
+      );
     case "end":
       return (
         <div
