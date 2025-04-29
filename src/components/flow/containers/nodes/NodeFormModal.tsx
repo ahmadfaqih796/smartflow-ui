@@ -16,12 +16,12 @@ type Props = {
 };
 
 const schema = yup.object().shape({
-  label: yup.string().required("Label wajib diisi"),
-  comment: yup.string().required("Comment wajib diisi"),
+  label: yup.string().required("Label wajib diisi").max(50, "Maksimal 50 karakter"),
+  index: yup.string().nullable().max(10, "Maksimal 10 karakter"),
+  comment: yup.string().nullable(),
 });
 
 const NodeFormModal: React.FC<Props> = ({ open, togleModal, data }) => {
-  console.log("vevevevevev", data);
   const { showAlert } = useAlert();
   const { setNodes } = useReactFlow();
   const {
@@ -35,13 +35,21 @@ const NodeFormModal: React.FC<Props> = ({ open, togleModal, data }) => {
 
   React.useEffect(() => {
     if (data) {
+      const fullLabel = data?.data?.label || "";
+      const labelMatch = fullLabel.match(/^(.*?)\((.*?)\)$/);
+
+      const label = labelMatch ? labelMatch[1].trim() : fullLabel;
+      const index = labelMatch ? labelMatch[2].trim() : "";
+
       reset({
-        label: data.data.label || null,
-        comment: data.data.comment || null,
+        label: label,
+        index: index,
+        comment: data?.data?.comment || "",
       });
     } else {
       reset({
         label: "",
+        index: "",
         comment: "",
       });
     }
@@ -50,19 +58,21 @@ const NodeFormModal: React.FC<Props> = ({ open, togleModal, data }) => {
   const onSubmit = async (values: any) => {
     try {
       setNodes((prevNodes: Node[]) =>
-            prevNodes.map((node: Node) =>
-              node.id === data.id
-                ? {
-                    ...node,
-                    data: {
-                      ...node.data,
-                      label: values.label,
-                      comment: values.comment,
-                    },
-                  }
-                : node
-            )
-          );
+        prevNodes.map((node: Node) =>
+          node.id === data.id
+            ? {
+                ...node,
+                data: {
+                  ...node.data,
+                  label: values.index
+                    ? `${values.label}(${values.index})`
+                    : values.label,
+                  comment: values.comment,
+                },
+              }
+            : node
+        )
+      );
       showAlert("Berhasil update data", "success");
       togleModal();
     } catch (error) {
@@ -85,6 +95,12 @@ const NodeFormModal: React.FC<Props> = ({ open, togleModal, data }) => {
               name="label"
               register={register("label")}
               error={errors.label}
+            />
+            <InputField
+              label="Index"
+              name="index"
+              register={register("index")}
+              error={errors.index}
             />
             <InputField
               label="Comment"

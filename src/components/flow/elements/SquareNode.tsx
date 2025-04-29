@@ -1,8 +1,10 @@
 import { Handle, NodeProps, Position, useStore } from "reactflow";
 import { COLOR_SHAPE_FLOW_DIAGRAM } from "../constants/digram.constant";
+import { getLabel } from "../utils/diagram.util";
 
 const SquareNode = ({ data }: NodeProps) => {
   const edges = useStore((state) => state.edges);
+  const { label, index } = getLabel(data?.label);
 
   return (
     <div
@@ -22,7 +24,12 @@ const SquareNode = ({ data }: NodeProps) => {
         </div>
       )}
 
-      <div className="text-sm text-center break-all">{data.label}</div>
+      <div className="flex items-center justify-center flex-col">
+        <div className="text-sm text-center break-all">{label}</div>
+        {index && (
+          <div className="text-sm text-center break-all">({index})</div>
+        )}
+      </div>
 
       <Handle
         id="top"
