@@ -1,0 +1,363 @@
+export const decisionData = {
+  edges: [
+    {
+      source: "1",
+      sourceHandle: "Bottom",
+      target: "2",
+      targetHandle: "Top",
+      id: "b1-t2",
+      data: {
+        label: "",
+        source: {
+          id: "1",
+          shapeId: "start",
+          label: "Start",
+        },
+        target: {
+          id: "2",
+          shapeId: "rectangle",
+          label: "Rectangle",
+        },
+        type: "next",
+      },
+      type: "smoothstep",
+      markerEnd: {
+        type: "arrow",
+        strokeWidth: 2,
+      },
+    },
+    {
+      source: "2",
+      sourceHandle: "Bottom",
+      target: "4",
+      targetHandle: "Top",
+      id: "b2-t4",
+      data: {
+        label: "",
+        source: {
+          id: "2",
+          shapeId: "rectangle",
+          label: "UNIT Kerja",
+        },
+        target: {
+          id: "4",
+          shapeId: "diamond",
+          label: "LEGAL",
+        },
+        type: "next",
+      },
+      type: "smoothstep",
+      markerEnd: {
+        type: "arrow",
+        strokeWidth: 2,
+      },
+      selected: false,
+    },
+    {
+      source: "4",
+      sourceHandle: "Right",
+      target: "5",
+      targetHandle: "Left",
+      id: "r4-l5",
+      data: {
+        label: "yes",
+        source: {
+          id: "4",
+          shapeId: "diamond",
+          label: "LEGAL",
+        },
+        target: {
+          id: "5",
+          shapeId: "rectangle",
+          label: "Rectangle",
+        },
+        type: "next",
+      },
+      type: "line",
+      markerEnd: {
+        type: "arrow",
+        strokeWidth: 2,
+      },
+    },
+    {
+      source: "5",
+      sourceHandle: "Bottom",
+      target: "3",
+      targetHandle: "Top",
+      id: "b5-t3",
+      data: {
+        label: "",
+        source: {
+          id: "5",
+          shapeId: "rectangle",
+          label: "TAX",
+        },
+        target: {
+          id: "3",
+          shapeId: "end",
+          label: "End",
+        },
+        type: "next",
+      },
+      type: "smoothstep",
+      markerEnd: {
+        type: "arrow",
+        strokeWidth: 2,
+      },
+    },
+    {
+      source: "4",
+      sourceHandle: "Left",
+      target: "6",
+      targetHandle: "Bottom",
+      id: "l4-b6",
+      data: {
+        label: "yes",
+        source: {
+          id: "4",
+          shapeId: "diamond",
+          label: "LEGAL",
+        },
+        target: {
+          id: "6",
+          shapeId: "rectangle",
+          label: "VENDOR",
+        },
+        type: "next",
+      },
+      type: "line",
+      markerEnd: {
+        type: "arrow",
+        strokeWidth: 2,
+      },
+    },
+    {
+      source: "6",
+      sourceHandle: "Top",
+      target: "2",
+      targetHandle: "Left",
+      id: "t6-l2",
+      data: {
+        label: "",
+        source: {
+          id: "6",
+          shapeId: "rectangle",
+          label: "VENDOR",
+        },
+        target: {
+          id: "2",
+          shapeId: "rectangle",
+          label: "UNIT Kerja",
+        },
+        type: "next",
+      },
+      type: "smoothstep",
+      markerEnd: {
+        type: "arrow",
+        strokeWidth: 2,
+      },
+    },
+  ],
+  nodes: [
+    {
+      id: "1",
+      type: "rounded",
+      position: {
+        x: 277,
+        y: 143,
+      },
+      data: {
+        shapeId: "start",
+        label: "Start",
+        edgesPosition: ["bottom"],
+      },
+      style: {
+        width: 180,
+        height: 90,
+      },
+      width: 180,
+      height: 90,
+      positionAbsolute: {
+        x: 277,
+        y: 143,
+      },
+    },
+    {
+      id: "2",
+      type: "rectangle",
+      position: {
+        x: 414.72698412698423,
+        y: 289.4994708994709,
+      },
+      data: {
+        shapeId: "rectangle",
+        label: "UNIT KERJA",
+      },
+      style: {
+        width: 180,
+        height: 90,
+      },
+      width: 180,
+      height: 90,
+      selected: true,
+      positionAbsolute: {
+        x: 414.72698412698423,
+        y: 289.4994708994709,
+      },
+      dragging: false,
+    },
+    {
+      id: "3",
+      type: "rounded",
+      position: {
+        x: 550.1322751322751,
+        y: 555.4994708994709,
+      },
+      data: {
+        shapeId: "end",
+        label: "End",
+        edgesPosition: ["top"],
+      },
+      style: {
+        width: 180,
+        height: 90,
+      },
+      width: 180,
+      height: 90,
+      selected: false,
+      positionAbsolute: {
+        x: 550.1322751322751,
+        y: 555.4994708994709,
+      },
+      dragging: false,
+    },
+    {
+      id: "4",
+      type: "square",
+      position: {
+        x: 340.5717813051147,
+        y: 461.662081128748,
+      },
+      data: {
+        shapeId: "diamond",
+        label: "LEGAL",
+      },
+      style: {
+        width: 100,
+        height: 100,
+      },
+      width: 100,
+      height: 100,
+      selected: false,
+      positionAbsolute: {
+        x: 340.5717813051147,
+        y: 461.662081128748,
+      },
+      dragging: false,
+    },
+    {
+      id: "5",
+      type: "rectangle",
+      position: {
+        x: 584.8440917107583,
+        y: 404.2730158730159,
+      },
+      data: {
+        shapeId: "rectangle",
+        label: "TAX",
+      },
+      style: {
+        width: 180,
+        height: 90,
+      },
+      width: 180,
+      height: 90,
+      selected: false,
+      positionAbsolute: {
+        x: 584.8440917107583,
+        y: 404.2730158730159,
+      },
+      dragging: false,
+    },
+    {
+      id: "6",
+      type: "rectangle",
+      position: {
+        x: 105.82821869488544,
+        y: 388.52275132275133,
+      },
+      data: {
+        shapeId: "rectangle",
+        label: "VENDOR",
+      },
+      style: {
+        width: 180,
+        height: 90,
+      },
+      width: 180,
+      height: 90,
+      selected: false,
+      dragging: false,
+      positionAbsolute: {
+        x: 105.82821869488544,
+        y: 388.52275132275133,
+      },
+    },
+  ],
+  roleDetail: [
+    {
+      curr_role: "Start",
+      role_next: "UNIT KERJA",
+      role_reject: null,
+      role_type: "Rectangle",
+      role_sla: null,
+      role_sla2: null,
+      comment: null,
+    },
+    {
+      curr_role: "UNIT KERJA",
+      role_next: "LEGAL",
+      role_reject: null,
+      role_type: "Diamond",
+      role_sla: null,
+      role_sla2: null,
+      comment: null,
+    },
+    {
+      curr_role: "LEGAL",
+      role_next: "TAX",
+      role_reject: null,
+      role_type: "Rectangle",
+      role_sla: null,
+      role_sla2: null,
+      comment: null,
+    },
+    {
+      curr_role: "TAX",
+      role_next: "End",
+      role_reject: null,
+      role_type: "End",
+      role_sla: null,
+      role_sla2: null,
+      comment: null,
+    },
+    {
+      curr_role: "LEGAL",
+      role_next: "VENDOR",
+      role_reject: null,
+      role_type: "Rectangle",
+      role_sla: null,
+      role_sla2: null,
+      comment: null,
+    },
+    {
+      curr_role: "VENDOR",
+      role_next: "UNIT KERJA",
+      role_reject: null,
+      role_type: "Rectangle",
+      role_sla: null,
+      role_sla2: null,
+      comment: null,
+    },
+  ],
+};

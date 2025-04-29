@@ -38,6 +38,7 @@ const nodeTypes = {
 const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
   // const { normalizeEdges } = useDiagram();
   const { edgesPosition } = useDiagramValidation();
+  const { project } = useReactFlow();
   const [nodes, setNodes] = React.useState<Node[]>([]);
   const [edges, setEdges] = React.useState<Edge[]>([]);
   const [selectedEdgeId, setSelectedEdgeId] = React.useState<string | null>(null);
@@ -95,8 +96,6 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
     },
     [nodes]
   );
-
-  const { project } = useReactFlow();
 
   const onDrop = React.useCallback(
     (event: React.DragEvent) => {
@@ -178,32 +177,36 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
           edges={edges.map((edge) => ({
             ...edge,
             style: {
-              // stroke: edge.id === selectedEdgeId ? "#3b82f6" : "black",
+              stroke: edge.id === selectedEdgeId ? "#3b82f6" : "black",
             },
             markerEnd: {
+              width: 30,
+              height: 30,
               type: MarkerType.ArrowClosed,
-              // color: edge.id === selectedEdgeId ? "#3b82f6" : "black",
+              color: edge.id === selectedEdgeId ? "#3b82f6" : "black",
             }
           }))}
-          // onEdgeClick={onEdgeClick}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
+          onEdgeClick={onEdgeClick}
+          onNodeClick={() => setSelectedEdgeId(null)}
+          onPaneClick={() => setSelectedEdgeId(null)}
           fitView
-          defaultEdgeOptions={{
-            type: "smoothstep",
-            animated: true,
-            style: {
-              // stroke: 'black',
-              strokeWidth: 2,
-            },
-            markerEnd: {
-              type: MarkerType.ArrowClosed,
-              width: 10,
-              height: 10,
-              // color: '#4f46e5',
-            },
-          }}
+          // defaultEdgeOptions={{
+          //   type: "smoothstep",
+          //   animated: true,
+          //   style: {
+          //     // stroke: 'black',
+          //     strokeWidth: 2,
+          //   },
+          //   markerEnd: {
+          //     type: MarkerType.ArrowClosed,
+          //     width: 20,
+          //     height: 20,
+          //     // color: '#4f46e5',
+          //   },
+          // }}
         >
           {/* <Background gap={20} variant={BackgroundVariant.Cross}/> */}
           <Controls />
