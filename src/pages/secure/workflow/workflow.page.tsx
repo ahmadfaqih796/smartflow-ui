@@ -152,6 +152,7 @@ const WorkflowPage: React.FC = () => {
           </div>
         </Card>
       </div>
+      {import.meta.env.VITE_API_URL}
       <WorkflowDiagram
         open={isOpen.diagram}
         togleModal={() => setIsOpen({ ...isOpen, diagram: false })}

@@ -18,6 +18,7 @@ import Panel from "./containers/Panel";
 import {
   DiamondNode,
   EndNode,
+  PlusNode,
   RectangleNode,
   SlaNode,
   SquareNode,
@@ -38,6 +39,7 @@ const nodeTypes = {
   square: SquareNode,
   sla: SlaNode,
   time: TimeNode,
+  plus: PlusNode
 };
 
 const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
