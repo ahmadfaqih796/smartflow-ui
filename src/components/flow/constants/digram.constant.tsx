@@ -7,6 +7,7 @@ export const SHAPE_LIST_FLOW_DIAGRAM = [
   "sla",
   'time',
   "plus",
+  "cross",
   // "circle",
 ];
 
@@ -18,6 +19,7 @@ export const COLOR_SHAPE_FLOW_DIAGRAM : Record<string, string> = {
   // diamond: "rotate-45 bg-[#FF9F43] rounded-sm text-white flex items-center justify-center cursor-move border-4 border-orange-700",
   diamond: "bg-[url(/images/flow/diamond.svg)] bg-cover text-white flex items-center justify-center cursor-move",
   plus: "bg-[url(/images/flow/plus.svg)] bg-cover text-white flex items-center justify-center cursor-move",
+  cross: "bg-[url(/images/flow/cross.svg)] bg-cover text-white flex items-center justify-center cursor-move",
   sla: "bg-fuchsia-500 rounded-full text-white flex items-center justify-center cursor-move border-4 border-fuchsia-700",
   time: "bg-orange-500 rounded-full text-white flex items-center justify-center cursor-move border-4 border-orange-700",
   circle: "w-20 h-20 bg-yellow-400 rounded-full text-white flex items-center justify-center cursor-move",

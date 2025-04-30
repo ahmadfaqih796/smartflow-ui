@@ -16,6 +16,7 @@ import Action from "./containers/Action";
 import NodeModal from "./containers/nodes/NodeFormModal";
 import Panel from "./containers/Panel";
 import {
+  CrossNode,
   DiamondNode,
   EndNode,
   PlusNode,
@@ -39,7 +40,8 @@ const nodeTypes = {
   square: SquareNode,
   sla: SlaNode,
   time: TimeNode,
-  plus: PlusNode
+  plus: PlusNode,
+  cross: CrossNode,
 };
 
 const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
@@ -127,6 +129,20 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
 
       setNodes((nds: Node[]) => {
         const count = (nds.length || 0) + 1;
+        const countPlus =
+          (nds.filter((n) => n.type === "plus").length || 0) + 1;
+        const countCross =
+          (nds.filter((n) => n.type === "cross").length || 0) + 1;
+        const getLabel = (value: string) => {
+          switch (value) {
+            case "plus":
+              return `P(${countPlus})`;
+            case "cross":
+              return `C(${countCross})`;
+            default:
+              return value;
+          }
+        };
         const newNode: Node = {
           id: `${type}-${count}`,
           type: type,
@@ -134,7 +150,7 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
           positionAbsolute: position,
           data: {
             edgesPosition: edgesPosition(type),
-            label: type,
+            label: getLabel(type),
             shapeId: type,
           },
         };
@@ -177,7 +193,7 @@ const FlowDiagram: React.FC<FlowProps> = ({ data }) => {
   };
   const onNodeDoubleClick = (_: any, node: Node) => {
     setSelectedEdgeId(null);
-    if (!["start", "end", "sla", "time"].includes(node.type as string)) {
+    if (["rectangle", "square", "diamond"].includes(node.type as string)) {
       setSelectedData({ node: node, edge: null });
       setIsOpen({ ...isOpen, form: true });
     }

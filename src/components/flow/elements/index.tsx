@@ -6,5 +6,16 @@ import SquareNode from "./SquareNode";
 import SlaNode from "./SlaNode";
 import TimeNode from "./TimeNode";
 import PlusNode from "./PlusNode";
+import CrossNode from "./CrossNode";
 
-export { DiamondNode, StartNode, RectangleNode, EndNode, SquareNode, SlaNode, TimeNode, PlusNode };
+export {
+  DiamondNode,
+  StartNode,
+  RectangleNode,
+  EndNode,
+  SquareNode,
+  SlaNode,
+  TimeNode,
+  PlusNode,
+  CrossNode,
+};
